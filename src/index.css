@@ -1,0 +1,18 @@
+@tailwind components;
+@tailwind utilities;
+
+.item-hover {
+  @apply hover:opacity-80 hover:transition-all hover:ease-in-out hover:duration-300  cursor-pointer;
+}
+
+.t-item-link {
+  @apply no-underline text-[#fff] py-[23px] px-[25px] hover:opacity-80 hover:transition-all hover:ease-in-out hover:duration-300;
+}
+
+.container-1060 {
+  @apply w-[1060px] mx-auto;
+}
+
+.container-1160 {
+  @apply w-[1160px] mx-auto;
+}

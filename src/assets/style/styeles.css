@@ -1,0 +1,146 @@
+body {
+  overflow-y: auto !important;
+  padding-right: 0 !important;
+}
+
+.nav-menu-top {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.nav-menu-top:hover,
+.category-top:hover + .nav-menu-top {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bg-img-gift {
+  height: 385px;
+  background: #f3fbfe
+    url(https://file002.shop-pro.jp/PA01361/349/img/top/bg_gift.jpg) no-repeat
+    right center;
+  background-size: auto 100%;
+}
+
+.title-boder::after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 28px;
+  background-color: #777;
+  margin-top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #222 !important;
+}
+
+.homeCarousel .slick-prev:before,
+.homeCarousel .slick-next:before {
+  color: #fff !important;
+}
+
+.item-abso-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.searchLine::after {
+  content: '';
+  position: absolute;
+  display: block;
+  height: 1px;
+  width: 270px;
+  background-color: #222;
+  bottom: -5px;
+}
+
+.input-text {
+  outline-color: '#222' !important;
+  border-color: '#222' !important;
+}
+
+.input-text:focus {
+  outline-color: '#222' !important;
+  border-color: '#222' !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  outline-color: '#222' !important;
+  border-color: '#222' !important;
+}
+
+.category-bot::before {
+  content: '- ';
+}
+
+.bg-product {
+  background-color: rgb(244, 244, 244);
+}
+
+.categoryScroll ul {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(235, 230, 230) #ebe8e8;
+}
+
+ul::-webkit-scrollbar {
+  width: 10px;
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: #9e9e9e;
+  border-radius: 10px;
+}
+
+ul::-webkit-scrollbar-track {
+  background-color: #eee8e8;
+  border-radius: 10px;
+}
+.carousel .thumbs-wrapper {
+  margin: 13px 20px;
+}
+li.thumb {
+  height: 80px;
+  width: 120px;
+}
+.carousel .thumbs {
+  padding: 0;
+}
+.carousel .thumb:hover {
+  cursor: pointer;
+}
+
+.carousel .control-next.control-arrow:before {
+  border-left: 8px solid #222 !important;
+}
+
+.carousel .control-prev.control-arrow:before {
+  border-right: 8px solid #222 !important;
+}
+.css-1nyar0v-MuiButtonBase-root-MuiButton-root {
+  background-color: #222;
+}
+
+.customNavLink {
+  color: #222;
+  text-decoration: none;
+  transition: opacity 0.3s, box-shadow 0.3s;
+}
+
+.customNavLink:hover {
+  opacity: 0.7;
+}
+
+.border-bot {
+  border-bottom: 1px solid #444;
+}
+
+.border-bot:hover {
+  border-bottom-color: #2196f3;
+}
