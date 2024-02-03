@@ -4,6 +4,7 @@ import RegisterRoutes from './Register'
 import LoginRoutes from './Login'
 import ProductRouter from './Product'
 import Cart from './Cart'
+// import  Form  from '~/pages/test/form'
 
 const router = createBrowserRouter([
   ...HomeRoutes,
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
   ...LoginRoutes,
   ...ProductRouter,
   ...Cart,
+  // {
+  //   path: '/form',
+  //   element: <Form />,
+  // },
 ])
 
 export default router

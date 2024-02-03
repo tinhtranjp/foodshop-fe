@@ -22,13 +22,17 @@ import CircularProgress from '@mui/material/CircularProgress'
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [open, setOpen] = useState(false)
+
   const logoutTimeoutRef = useRef<number | undefined>(undefined)
+
   const handleCloseBackdrop = () => {
     setOpen(false)
   }
+
   const handleOpenBackdrop = () => {
     setOpen(true)
   }
+
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
@@ -42,6 +46,7 @@ export default function Header() {
   const cartItemsCount = useSelector(cartItemsCountSelector)
   const cartTotal = useSelector(cartTotalSelector)
   const loggedInUser = useSelector((state: RootState) => state.user.current)
+
   const handleLogout = () => {
     handleOpenBackdrop()
 
@@ -55,7 +60,10 @@ export default function Header() {
       handleClose()
     }, 500)
   }
-  const isLoggedIn = !!loggedInUser.token
+  let isLoggedIn
+  if (loggedInUser) {
+    isLoggedIn = !!loggedInUser.token
+  }
 
   const { data, error } = useSWR<CategoryModel[]>('categories', fetcherData)
 
@@ -102,11 +110,13 @@ export default function Header() {
               </NavLink>
             </li>
           )}
-          <li className='list-none'>
-            <NavLink to='/register' className='t-item-link text-[14px]'>
-              新規登録
-            </NavLink>
-          </li>
+          {!isLoggedIn && (
+            <li className='list-none'>
+              <NavLink to='/register' className='t-item-link text-[14px]'>
+                新規登録
+              </NavLink>
+            </li>
+          )}
           <li className='list-none'>
             <NavLink
               to='/cart'

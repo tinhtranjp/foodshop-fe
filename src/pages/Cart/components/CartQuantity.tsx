@@ -57,7 +57,7 @@ export const CartQuantity: React.FC<CartQuantityProps> = ({ cartItem }) => {
     if (error) return
     if (cartItem.quantity <= 1) return
     setMount((prevMount) => prevMount - 1)
-    const newQuantity = cartItem.quantity + 1
+    const newQuantity = cartItem.quantity - 1
 
     dispatch(setQuantity({ id: cartItem.id, quantity: newQuantity }))
     if (quantityInputRef.current) {

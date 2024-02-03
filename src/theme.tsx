@@ -17,8 +17,8 @@ const theme = extendTheme({
           link: '#4183c4',
         },
         customBg: {
-          primary: '#F4F2EF',
-          secondary: '#E6E4DE',
+          primary: '#E6E4DE',
+          secondary: '#F4F2EF',
           btnPrimary: '#D58061',
           btnSecondary: '#2196f3',
           btnAndFileSmall: '#eff2f4',

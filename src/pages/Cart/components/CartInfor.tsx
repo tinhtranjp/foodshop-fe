@@ -312,8 +312,8 @@ export const CartInfor = () => {
       </Box>
       <Typography variant='subtitle1'>
         {user?.full_name.toLocaleUpperCase()}
-        <span className='ml-20'>{user?.phone_number}</span>
       </Typography>
+      <Typography>携帯電話: {user?.phone_number}</Typography>
       <Typography sx={{ my: '2px' }}>{user?.email}</Typography>
       <Typography variant='subtitle1'>{`${address?.post_id} - ${address?.prefecture} ${address?.address1} ${address?.address2}`}</Typography>
     </Box>

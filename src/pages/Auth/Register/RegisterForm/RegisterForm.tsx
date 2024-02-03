@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { schema } from '~/utils/validationLogister'
+import { schema } from '~/utils/validationRegister'
 import { useForm, Controller, SubmitHandler } from 'react-hook-form'
 import IconButton from '@mui/material/IconButton'
 import OutlinedInput from '@mui/material/OutlinedInput'
@@ -24,6 +24,7 @@ import { register } from '../../UserSlice'
 import { unwrapResult } from '@reduxjs/toolkit'
 import { ToastContainer } from 'react-toastify'
 import { toastError, toastSuccess } from '~/components/CustomToast'
+import CustomTextField from '~/components/InputFile/CustomTextField'
 
 //need Refacter
 
@@ -173,49 +174,25 @@ const RegisterForm: React.FC = () => {
     >
       {/* full name */}
       <Box sx={{ width: '80%', mx: 'auto' }}>
-        <Controller
+        <CustomTextField
           name='full_name'
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='お名前（必須）'
-              variant='outlined'
-              error={!!errors.full_name}
-              helperText={errors.full_name ? errors.full_name?.message : ''}
-              onFocus={() => handleFocus('full_name')}
-              size='small'
-              fullWidth
-            />
-          )}
+          label='お名前（必須）'
+          exampleText='	
+          例) 山田　太郎'
+          onFocus={() => handleFocus('full_name')}
         />
-        <Typography variant='caption' component='p' sx={{ p: '5px 14px 16px' }}>
-          例) 山田 太郎
-        </Typography>
       </Box>
       {/* furigana name */}
       <Box sx={{ width: '80%', mx: 'auto' }}>
-        <Controller
+        <CustomTextField
           name='furigana_name'
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='お名前(フリガナ)'
-              variant='outlined'
-              error={!!errors.furigana_name}
-              helperText={
-                errors.furigana_name ? errors.furigana_name?.message : ''
-              }
-              onFocus={() => handleFocus('furigana_name')}
-              size='small'
-              fullWidth
-            />
-          )}
+          label='お名前(フリガナ)'
+          exampleText='	
+          例) ヤマダ　タロウ'
+          onFocus={() => handleFocus('furigana_name')}
         />
-        <Typography variant='caption' component='p' sx={{ p: '5px 14px 16px' }}>
-          例) ヤマダ タロウ
-        </Typography>
       </Box>
       {/* Post */}
       <Box sx={{ width: '80%', mx: 'auto' }}>
@@ -225,7 +202,7 @@ const RegisterForm: React.FC = () => {
           render={({ field }) => (
             <TextField
               {...field}
-              label='お名前(フリガナ)'
+              label='PostId'
               variant='outlined'
               error={!!errors.post_id}
               helperText={errors.post_id ? errors.post_id?.message : ''}
@@ -279,117 +256,58 @@ const RegisterForm: React.FC = () => {
       </Box>
       {/* address1 市区町村、番地等*/}
       <Box sx={{ width: '80%', mx: 'auto' }}>
-        <Controller
+        <CustomTextField
           name='address1'
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='住所１（必須）'
-              variant='outlined'
-              error={!!errors.address1}
-              helperText={errors.address1 ? errors.address1?.message : ''}
-              onFocus={() => handleFocus('address1')}
-              size='small'
-              fullWidth
-            />
-          )}
+          label='住所１（必須）'
+          exampleText='	
+          市区町村、番地等'
+          onFocus={() => handleFocus('furigana_name')}
         />
-        <Typography variant='caption' component='p' sx={{ p: '5px 14px 16px' }}>
-          市区町村、番地等
-        </Typography>
       </Box>
       {/* address2 アパート・マンション名、部屋番号等*/}
       <Box sx={{ width: '80%', mx: 'auto' }}>
-        <Controller
+        <CustomTextField
           name='address2'
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='住所２（必須）'
-              variant='outlined'
-              error={!!errors.address2}
-              helperText={errors.address2 ? errors.address2?.message : ''}
-              onFocus={() => handleFocus('address2')}
-              size='small'
-              fullWidth
-            />
-          )}
+          label='住所２（必須）'
+          exampleText='	
+          アパート・マンション名、部屋番号等'
+          onFocus={() => handleFocus('furigana_name')}
         />
-        <Typography variant='caption' component='p' sx={{ p: '5px 14px 16px' }}>
-          アパート・マンション名、部屋番号等
-        </Typography>
       </Box>
       {/* Email */}
       <Box sx={{ width: '80%', mx: 'auto' }}>
-        <Controller
+        <CustomTextField
           name='email'
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='Email'
-              variant='outlined'
-              error={!!errors.email}
-              helperText={errors.email ? errors.email?.message : ''}
-              onFocus={() => handleFocus('email')}
-              size='small'
-              fullWidth
-              autoComplete='email'
-            />
-          )}
+          label='Email'
+          exampleText='sky@gmail.com'
+          onFocus={() => handleFocus('furigana_name')}
         />
-        <Typography variant='caption' component='p' sx={{ p: '5px 14px 16px' }}>
-          例) skyblue@gmail.com
-        </Typography>
       </Box>
       {/* Phone Number */}
       <Box sx={{ width: '80%', mx: 'auto' }}>
-        <Controller
+        <CustomTextField
           name='phone_number'
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='電話番号（必須）'
-              variant='outlined'
-              error={!!errors.phone_number}
-              helperText={
-                errors.phone_number ? errors.phone_number?.message : ''
-              }
-              onFocus={() => handleFocus('phone_number')}
-              size='small'
-              fullWidth
-            />
-          )}
+          label='電話番号（必須）'
+          exampleText='	
+          例) 03-1234-5678'
+          onFocus={() => handleFocus('furigana_name')}
         />
-        <Typography variant='caption' component='p' sx={{ p: '5px 14px 16px' }}>
-          例) 090-1234-5678
-        </Typography>
       </Box>
 
       {/* FAX */}
       <Box sx={{ width: '80%', mx: 'auto' }}>
-        <Controller
+        <CustomTextField
           name='fax_number'
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='FAX番号'
-              variant='outlined'
-              error={!!errors.fax_number}
-              helperText={errors.fax_number ? errors.fax_number?.message : ''}
-              onFocus={() => handleFocus('fax_number')}
-              size='small'
-              fullWidth
-            />
-          )}
+          label='FAX番号'
+          exampleText='	
+          例) 03-1234-5678'
+          onFocus={() => handleFocus('furigana_name')}
         />
-        <Typography variant='caption' component='p' sx={{ p: '5px 14px 16px' }}>
-          例) 03-1234-5678
-        </Typography>
       </Box>
       {/* Gender */}
       <Box sx={{ width: '80%', mx: 'auto', mb: '16px' }}>
@@ -544,25 +462,14 @@ const RegisterForm: React.FC = () => {
       </Typography>
       {/* Logister ID */}
       <Box sx={{ width: '80%', mx: 'auto' }}>
-        <Controller
+        <CustomTextField
           name='login_id'
           control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label='ログイン ID（必須）'
-              variant='outlined'
-              error={!!errors.login_id}
-              helperText={errors.login_id ? errors.login_id?.message : ''}
-              onFocus={() => handleFocus('login_id')}
-              size='small'
-              fullWidth
-            />
-          )}
+          label='ログイン ID（必須）'
+          exampleText='	
+          例) skyblue98'
+          onFocus={() => handleFocus('furigana_name')}
         />
-        <Typography variant='caption' component='p' sx={{ p: '5px 14px 16px' }}>
-          例) skyblue98
-        </Typography>
       </Box>
       {/*Password file*/}
       <Controller

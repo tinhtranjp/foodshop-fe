@@ -6,7 +6,7 @@ import { ResponProduct } from '~/model/ProductModel'
 import { baseURL } from '~/constants/Api'
 const RecommendList = () => {
   const { data, error, isLoading } = useSWR<ResponProduct>(
-    'products',
+    'products?page=1&limit=10',
     fetcherData,
   )
 

@@ -28,7 +28,7 @@ const ProductSlide: React.FC<ProductSlideProps> = ({ products }) => {
 
   return (
     <Slider {...settings}>
-      {products.map((product) => (
+      {products && products.map((product) => (
         <NavLink
           to={`/product/${product.id}`}
           className='no-underline'
