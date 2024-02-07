@@ -1,13 +1,13 @@
 import React from 'react'
-import { Carousel } from 'react-responsive-carousel'
+import {Carousel} from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { listProductImgModel } from '~/model/ProductModel'
-import { baseURL } from '~/constants/Api'
+import {listProductImgModel} from '~/model/ProductModel'
+import {baseURL} from '~/constants/Api'
 interface propsItem {
   listImg: listProductImgModel[]
 }
 
-export const CarouselDetail: React.FC<propsItem> = ({ listImg }) => {
+export const CarouselDetail: React.FC<propsItem> = ({listImg}) => {
   return (
     <Carousel showArrows={true} showIndicators={true}>
       {listImg.map((img) => (

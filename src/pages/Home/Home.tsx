@@ -1,5 +1,5 @@
 import HomeCarousel from '~/components/HomeCarousel'
-import { NavLink, useNavigate } from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 import NewsLogo from '~/assets/img/ttl_news.svg'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import miso from '~/assets/img/img_category_miso.jpg'
@@ -9,19 +9,21 @@ import dashi from '~/assets/img/img_category_03.jpg'
 import shinshu from '~/assets/img/img_category_04.jpg'
 import forgift from '~/assets/img/ttl_gift_sub.svg'
 import Button from '@mui/material/Button'
-import NewsItem from './components/NewsItem'
 import RankingImg from '~/assets/img/ttl_ranking.svg'
 import RecommendImg from '~/assets/img/ttl_recommend.svg'
 import RecommendList from './components/RecommendList'
 import RankingList from './components/RankingList'
+import NewsItem from './components/NewsItem'
 import cateBotImg1 from '~/assets/img/cateBot_img1.jpg'
 import cateBotImg2 from '~/assets/img/cateBot_img2.jpg'
 import cateBotImg3 from '~/assets/img/cateBot_img3.jpg'
 import cateBotImg4 from '~/assets/img/cateBot_img4.jpg'
 import cateBotImg5 from '~/assets/img/cateBot_img5.jpg'
 import cateBotImg6 from '~/assets/img/cateBot_img6.jpg'
-
+import {Box, Typography, useTheme} from '@mui/material'
+import Grid from '@mui/material/Unstable_Grid2'
 export default function Home() {
+  const theme = useTheme()
   const cateBotImgs = [
     cateBotImg1,
     cateBotImg2,
@@ -34,15 +36,40 @@ export default function Home() {
   const navigate = useNavigate()
 
   return (
-    <div>
+    <Box sx={{pt: '65px'}}>
       <HomeCarousel />
-      <div className='mt-10 bg-backGround-2 pt-16 pb-10'>
-        <div className='container-1060'>
-          <div className='flex items-start'>
-            <h2 className='pr-[15%] leading-[0px] m-0'>
+      <Box
+        sx={{
+          paddingTop: '64px',
+          paddingBottom: '40px',
+          background: (theme) => theme.palette.customBg.secondary,
+        }}
+      >
+        <Box sx={{width: {xl: '1060px'}, mx: 'auto'}}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'start',
+              flexDirection: {xs: 'column', sm: 'unset'},
+              px: {xs: '15px', md: '50px'},
+            }}
+          >
+            <Typography component='h2' sx={{pr: {sm: '8%', lg: '15%'}}}>
               <img src={NewsLogo} alt='news' className='w-full h-full block' />
-            </h2>
-            <ul className='list-none m-0 p-0 flex flex-col gap-y-3 tracking-[2px]'>
+            </Typography>
+            <Box
+              component='ul'
+              sx={{
+                listStyle: 'none',
+                mt: {xs: '40px', sm: '0'},
+                margin: 0,
+                padding: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: {xs: '30px 0', md: '12px 0'},
+                letterSpacing: '2px',
+              }}
+            >
               <li>
                 <NewsItem
                   date='2024.01.16'
@@ -73,59 +100,176 @@ export default function Home() {
                   title=' 【ご案内】「国産 粉山椒 細挽き」の内容量変更'
                 />
               </li>
-            </ul>
-          </div>
-          <div className='flex justify-end mt-10 t-item-link hover:cursor-pointer text-[#222] p-0'>
-            <NavLink to='/' className='text-[#222] mr-3'>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'end',
+              mt: '40px',
+              color: '#222',
+              textDecoration: 'none',
+            }}
+            className='item-hover'
+          >
+            <NavLink to='/' style={{marginRight: '12px', color: '#222'}}>
               もっと見る
             </NavLink>
             <KeyboardArrowRightIcon />
-          </div>
-          <div className='grid grid-cols-6 gap-x-10 gap-y-6 pt-[63px] pb-[100px]'>
-            <NavLink
-              to='/product?category_id=6&category_name=味噌'
-              className='col-span-3 item-hover'
+          </Box>
+          <Grid
+            container
+            sx={{
+              paddingTop: '63px',
+              paddingBottom: '100px',
+            }}
+          >
+            <Grid xs={12} md={6} lg={6} p={1}>
+              <NavLink
+                to='/product?category_id=6&category_name=味噌'
+                className=' item-hover'
+                style={{width: '100%', maxWidth: '100%', display: 'block'}}
+              >
+                <img
+                  src={miso}
+                  alt='miso'
+                  style={{display: 'block', width: '100%'}}
+                />
+              </NavLink>
+            </Grid>
+            <Grid xs={12} md={6} lg={6} p={1}>
+              <NavLink
+                to='/product?category_id=13&category_name=おかず・惣菜'
+                className=' item-hover'
+                style={{width: '100%', maxWidth: '100%', display: 'block'}}
+              >
+                <img
+                  src={okazu}
+                  alt='okazu'
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'fill',
+                  }}
+                />
+              </NavLink>
+            </Grid>
+            <Grid
+              xs={12}
+              md={4}
+              lg={4}
+              p={1}
+              sx={{
+                [theme.breakpoints.down('md')]: {
+                  height: '344px',
+                },
+              }}
             >
-              <img src={miso} alt='miso' />
-            </NavLink>
-            <NavLink
-              to='/product?category_id=13&category_name=おかず・惣菜'
-              className='col-span-3 item-hover'
+              <NavLink
+                to='/product?category_id=12&category_name=醤油'
+                className=' item-hover'
+                style={{width: '100%', maxWidth: '100%', display: 'block'}}
+              >
+                <img
+                  src={sauce}
+                  alt='sauce'
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'fill',
+                  }}
+                />
+              </NavLink>
+            </Grid>
+            <Grid
+              xs={12}
+              md={4}
+              lg={4}
+              sx={{
+                [theme.breakpoints.down('md')]: {
+                  height: '344px',
+                },
+              }}
+              p={1}
             >
-              <img src={okazu} alt='okazu' />
-            </NavLink>
-            <NavLink
-              to='/product?category_id=12&category_name=醤油'
-              className='col-span-2 item-hover'
+              <NavLink
+                to='/product?category_id=17&category_name=だし・かえし'
+                className='item-hover'
+                style={{width: '100%', maxWidth: '100%', display: 'block'}}
+              >
+                <img
+                  src={dashi}
+                  alt='dashi'
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'fill',
+                  }}
+                />
+              </NavLink>
+            </Grid>
+            <Grid
+              xs={12}
+              md={4}
+              lg={4}
+              sx={{
+                [theme.breakpoints.down('md')]: {
+                  height: '344px',
+                },
+              }}
+              p={1}
             >
-              <img src={sauce} alt='sauce' />
-            </NavLink>
-            <NavLink
-              to='/product?category_id=17&category_name=だし・かえし'
-              className='col-span-2 item-hover'
-            >
-              <img src={dashi} alt='dashi' />
-            </NavLink>
-            <NavLink
-              to='/product?category_id=19&category_name=信州名物'
-              className='col-span-2 item-hover'
-            >
-              <img src={shinshu} alt='shishu' />
-            </NavLink>
-          </div>
-        </div>
+              <NavLink
+                to='/product?category_id=19&category_name=信州名物'
+                className=' item-hover'
+                style={{width: '100%', height: '100%', display: 'block'}}
+              >
+                <img
+                  src={shinshu}
+                  alt='shishu'
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'fill',
+                  }}
+                />
+              </NavLink>
+            </Grid>
+          </Grid>
+        </Box>
         <div className='bg-img-gift'>
-          <div className='container-1060 py-[5px]'>
+          <Box
+            sx={{
+              display: {xs: 'none', lg: 'block'},
+              width: {lg: '1060px'},
+              mx: 'auto',
+              py: '5px',
+              px: {xs: '40px'},
+            }}
+          >
             <h2>
               <img src={forgift} alt='gift' />
             </h2>
-            <p className='w-[420px] text-[16px] tracking-[3px] leading-8'>
+            <Typography
+              component='p'
+              sx={{
+                width: {lg: '420px'},
+                fontSize: '16px',
+                letterSpacing: '3px',
+                lineHeight: '1.8',
+                mb: 3,
+              }}
+            >
               酢重正之商店では、大切な方への贈り物をご用意しております。
               じっくり丁寧に作られた味噌や醤油、オリジナルのたれや
               ドレッシングなどを詰め合わせ、心をこめてお包みします。
               気軽に送れる小瓶セットから、和の調味料を揃えたセットまで、
               贈るシーンやお相手に合わせてお選びください。
-            </p>
+            </Typography>
             <Button
               variant='contained'
               size='large'
@@ -135,49 +279,92 @@ export default function Home() {
             >
               贈り物
             </Button>
-          </div>
+          </Box>
         </div>
-        <div className='container-1160  pt-[107px] pb-10 '>
-          <div className='mb-24'>
-            <h2 className='text-center'>
+        <Box sx={{width: {xl: '1160px'}, mx: 'auto', pt: '107px', pb: '40px'}}>
+          <Box sx={{mb: '88px'}}>
+            <Typography component='h2' sx={{textAlign: 'center'}}>
               <img src={RecommendImg} alt='recommend' />
-            </h2>
-            <h3 className='text-center mt-5 text-[16px] bold tracking-[2px] relative title-boder'>
+            </Typography>
+            <Typography
+              component='h3'
+              sx={{
+                textAlign: 'center',
+                marginTop: '20px',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                letterSpacing: '2px',
+                position: 'relative',
+              }}
+              className='title-boder'
+            >
               季節のおすすめ商品
-            </h3>
-          </div>
-          <RecommendList />
-        </div>
-        <div className='bg-backGround-2'>
-          <div className='container-1160'>
-            <div className='mb-24'>
-              <h2 className='text-center'>
+            </Typography>
+          </Box>
+          <Box sx={{px: '4px'}}>
+            <RecommendList />
+          </Box>
+        </Box>
+        <Box sx={{background: (theme) => theme.palette.customBg.secondary}}>
+          <Box sx={{width: {lg: '1060px'}, mx: 'auto'}}>
+            <Box sx={{mb: '96px'}}>
+              <Typography component='h2' textAlign='center'>
                 <img src={RankingImg} alt='recommend' />
-              </h2>
-              <h3 className='text-center mt-5 text-[16px] bold tracking-[2px] relative title-boder'>
+              </Typography>
+              <Typography
+                component='h3'
+                sx={{
+                  textAlign: 'center',
+                  marginTop: '20px',
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  letterSpacing: '2px',
+                  position: 'relative',
+                }}
+                className='title-boder'
+              >
                 売れ筋商品
-              </h3>
-            </div>
-            <div className='w-[880px] mx-auto'>
+              </Typography>
+            </Box>
+            <Box
+              sx={{width: {xs: '250px', sm: '600px', md: '880px'}, mx: 'auto'}}
+            >
               <RankingList />
-            </div>
-            <ul className='list-none grid grid-cols-3 gap-6 pt-[150px]'>
+            </Box>
+            <Grid
+              component='ul'
+              container
+              sx={{listStyle: 'none', pt: '150px', padding: 0, mt: '120px'}}
+            >
               {cateBotImgs &&
                 cateBotImgs.map((img, index) => (
-                  <li className='item-hover' key={index}>
+                  <Grid
+                    component='li'
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    p={1}
+                    className='item-hover'
+                    key={index}
+                  >
                     <NavLink to='#'>
                       <img
                         src={img}
                         alt=''
-                        className='w-full max-w-[100%] h-[116px] object-cover'
+                        style={{
+                          width: '100%',
+                          maxWidth: '100%',
+                          height: '116px',
+                          objectFit: 'cover',
+                        }}
                       />
                     </NavLink>
-                  </li>
+                  </Grid>
                 ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+            </Grid>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   )
 }

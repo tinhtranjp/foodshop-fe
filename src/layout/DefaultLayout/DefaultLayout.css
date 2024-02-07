@@ -1,0 +1,32 @@
+.navLinkTop {
+    text-decoration: none;
+    padding: 23px 25px;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .navLinkTop {
+        padding: 23px 0px 23px 20px;
+    }
+}
+.navLinkTop:hover {
+    opacity: 0.8;
+    transition: all .3s ease-in-out;
+}
+
+.inputXs{
+    margin: 0 !important;
+    position: relative !important;
+}
+
+.searchBtn::placeholder {
+    text-align: center !important;
+}
+
+.navLinkBot {
+    text-decoration: none;
+    color: #444;
+    padding: 0;
+    transition: all 0.3s ease-in-out;
+}
+

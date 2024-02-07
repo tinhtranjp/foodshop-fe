@@ -1,6 +1,6 @@
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import { Box } from '@mui/material'
+import {Box} from '@mui/material'
 
 interface ItemProps {
   currentSort: string | (string | null)[]
@@ -8,7 +8,7 @@ interface ItemProps {
 }
 
 function ProductSort(props: ItemProps) {
-  const { currentSort, onChange } = props
+  const {currentSort, onChange} = props
 
   const handleChangeSort = (
     event: React.ChangeEvent<unknown>,
@@ -18,7 +18,7 @@ function ProductSort(props: ItemProps) {
   }
 
   return (
-    <Box sx={{ pt: 2 }}>
+    <Box sx={{pt: 2, display: {xs: 'none', sm: 'block'}}}>
       <Tabs
         value={currentSort}
         onChange={handleChangeSort}
@@ -26,8 +26,8 @@ function ProductSort(props: ItemProps) {
         indicatorColor='secondary'
         aria-label='secondary tabs example'
       >
-        <Tab label='Gia thap toi cao' value='asc'></Tab>
-        <Tab label='Gia cao xuong thap' value='desc'></Tab>
+        <Tab label='高格順' value='asc'></Tab>
+        <Tab label='安格順' value='desc'></Tab>
       </Tabs>
     </Box>
   )

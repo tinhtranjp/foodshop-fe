@@ -1,22 +1,22 @@
 import React from 'react'
-import { Box, Typography } from '@mui/material'
-import { AddtoCartForm } from './AddtoCartForm'
-import { NavLink } from 'react-router-dom'
+import {Box, Typography} from '@mui/material'
+import {AddtoCartForm} from './AddtoCartForm'
+import {NavLink} from 'react-router-dom'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
-import { ProductDetail } from '~/model/ProductModel'
+import {ProductDetail} from '~/model/ProductModel'
 import Rating from '@mui/material/Rating'
 
 interface productItem {
   product: ProductDetail | undefined
 }
 
-export const InforDetail: React.FC<productItem> = ({ product }) => {
+export const InforDetail: React.FC<productItem> = ({product}) => {
   return (
-    <Box sx={{ pl: '50px' }}>
-      <Typography variant='h1' sx={{ fontSize: '25px' }}>
+    <Box sx={{pl: {xs: '5px', lg: '50px'}}}>
+      <Typography variant='h1' sx={{fontSize: '25px'}}>
         {product?.name}
       </Typography>
-      <Rating name='read-only' value={5} readOnly sx={{ mb: '20px', mt: 1 }} />
+      <Rating name='read-only' value={5} readOnly sx={{mb: '20px', mt: 1}} />
       <Box
         sx={{
           display: 'flex',
@@ -26,7 +26,7 @@ export const InforDetail: React.FC<productItem> = ({ product }) => {
       >
         <Typography
           variant='subtitle2'
-          sx={{ fontSize: '16px', fontWeight: '700px', opacity: '0.8' }}
+          sx={{fontSize: '16px', fontWeight: '700px', opacity: '0.8'}}
         >
           ID: {product?.id.toString().padStart(2, '0')}{' '}
         </Typography>
@@ -46,7 +46,7 @@ export const InforDetail: React.FC<productItem> = ({ product }) => {
         価格：{product?.price.toLocaleString()}円(税込)
       </Typography>
       <AddtoCartForm product={product} />
-      <Typography variant='subtitle2' sx={{ mt: 4, color: 'red' }}>
+      <Typography variant='subtitle2' sx={{mt: 4, color: 'red'}}>
         6,000円（税込）以上のお買い上げで送料無料
       </Typography>
       <ul className='p-0 m-0 list-none gap-2 flex flex-col first-of-type:mt-5'>

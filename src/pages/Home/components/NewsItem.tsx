@@ -1,19 +1,50 @@
+import {Typography} from '@mui/material'
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 interface NewsItemProps {
   date: string
   title: string
 }
 
-const NewsItem: React.FC<NewsItemProps> = ({ title, date }) => {
+const NewsItem: React.FC<NewsItemProps> = ({title, date}) => {
   return (
     <>
-      <NavLink to='/' className=' t-item-link flex m-0 p-0'>
-        <h4 className='m-0 tracking-[0px] mr-5 w-[110px]  text-[#222] text-[15px] font-normal'>
+      <NavLink
+        to='/'
+        className=' item-hover '
+        style={{
+          display: 'flex',
+          margin: '0',
+          padding: '0',
+          textDecoration: 'none',
+        }}
+      >
+        <Typography
+          component='h4'
+          sx={{
+            margin: 0,
+            letterSpacing: '0px',
+            marginRight: '20px',
+            minWidth: '110px',
+            color: '#222',
+            fontSize: '15px',
+            fontWeight: 'normal',
+          }}
+        >
           {date}
-        </h4>
-        <h3 className='m-0 text-[#222] text-[15px] font-normal'>{title}</h3>
+        </Typography>
+        <Typography
+          component='h3'
+          sx={{
+            margin: 0,
+            color: '#222',
+            fontSize: '15px',
+            fontWeight: 'normal',
+          }}
+        >
+          {title}
+        </Typography>
       </NavLink>
     </>
   )

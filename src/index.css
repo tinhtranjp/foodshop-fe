@@ -1,9 +1,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.item-hover {
-  @apply hover:opacity-80 hover:transition-all hover:ease-in-out hover:duration-300  cursor-pointer;
-}
 
 .t-item-link {
   @apply no-underline text-[#fff] py-[23px] px-[25px] hover:opacity-80 hover:transition-all hover:ease-in-out hover:duration-300;

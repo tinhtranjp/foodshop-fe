@@ -1,24 +1,20 @@
-import { Box, Grid, Pagination, Paper } from '@mui/material'
-import { useEffect, useMemo } from 'react'
+import {Box, Grid, Pagination, Paper, useTheme} from '@mui/material'
+import {useEffect, useMemo} from 'react'
 import productApi from '~/api/productApi'
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import ProductSkeletonList from './components/ProductSkeletonList'
-import { PaginationModel, ProductModel } from '~/model/ProductModel'
+import {PaginationModel, ProductModel} from '~/model/ProductModel'
 import ProductList from '~/pages/Product/components/ProductList'
 import ProductSort from './components/ProductSort'
 import ProductFilter from './components/ProductFilter'
-import { FiltersModel } from '~/model/FiltersModel'
+import {FiltersModel} from '~/model/FiltersModel'
 import FilterViewer from './components/Filters/FilterViewer'
 import FilterSearch from './components/Filters/FilterSearch'
-import { useLocation, useNavigate } from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 import queryString from 'query-string'
-import Header from '~/layout/DefaultLayout/Header'
-import Typography from '@mui/material/Typography'
-import iconMail from '~/assets/img/icon_mail.svg'
-import mailText from '~/assets/img/ttl_mailmagazine.svg'
-import CopyrightIcon from '@mui/icons-material/Copyright'
-import { NavLink } from 'react-router-dom'
-import { Button } from '@mui/material'
+import Header from '~/layout/DefaultLayout/components/Header'
+import Footer from '~/layout/DefaultLayout/components/Footer'
+
 export default function Product() {
   const [productList, setProductList] = useState<ProductModel[]>([])
   const [loading, setLoading] = useState(true)
@@ -28,6 +24,7 @@ export default function Product() {
     page: 1,
   })
 
+  const theme = useTheme()
   const location = useLocation()
   const navigate = useNavigate()
   const queryParams = useMemo(() => {
@@ -45,7 +42,7 @@ export default function Product() {
   }, [location.search])
 
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    window.scrollTo({top: 0})
   }, [])
   useEffect(() => {
     // eslint-disable-next-line no-extra-semi
@@ -122,11 +119,24 @@ export default function Product() {
   }
 
   return (
-    <div>
+    <Box>
       <Header />
-      <Box className='pt-[100px] px-[10%] pb-5 bg-product'>
+      <Box
+        sx={{
+          paddingTop: '100px',
+          px: {sm: '3%', lg: '10%'},
+          paddingBottom: '5%',
+          backgroundColor: (theme) => theme.palette.customBg.secondary,
+        }}
+      >
         <Grid container spacing={2}>
-          <Grid item sx={{ width: '250px' }}>
+          <Grid
+            item
+            xl={2}
+            lg={4}
+            md={3}
+            sx={{display: {xs: 'none', md: 'block'}}}
+          >
             <Paper elevation={0}>
               <ProductFilter
                 filters={queryParams}
@@ -134,9 +144,16 @@ export default function Product() {
               />
             </Paper>
           </Grid>
-          <Grid item sx={{ flex: '1 1 0' }}>
+          <Grid item xl={10} lg={8} md={9} sm={12} xs={12} sx={{flex: '1 1 0'}}>
             <Paper elevation={0}>
-              <div className='flex items-center justify-between'>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  px: {xs: '5px', md: 'unset'},
+                }}
+              >
                 <ProductSort
                   currentSort={queryParams.sort_by_price}
                   onChange={handleSortChange}
@@ -145,14 +162,14 @@ export default function Product() {
                   keyword={queryParams.keyword}
                   onChange={handleSearch}
                 />
-              </div>
+              </Box>
               <FilterViewer filters={queryParams} onChange={setNewFilters} />
               {loading ? (
                 <ProductSkeletonList length={8} />
               ) : (
                 productList && <ProductList data={productList} />
               )}
-              <Box sx={{ display: 'flex', justifyContent: 'center', py: 5 }}>
+              <Box sx={{display: 'flex', justifyContent: 'center', py: 5}}>
                 <Pagination
                   color='primary'
                   count={pagination.total}
@@ -164,73 +181,7 @@ export default function Product() {
           </Grid>
         </Grid>
       </Box>
-      <div className='bg-[#222] pt-[40px] pb-5'>
-        <h2 className='text-center m-0 text-[#fff]'>T-Shop</h2>
-        <div className='w-[1160px] mx-auto flex mt-[75px] justify-between'>
-          <ul className='list-none p-0 m-0 grid grid-cols-2 w-1/2'>
-            <li>
-              <NavLink
-                to='/'
-                className='t-item-link text-[14px] p-0 tracking-widest'
-              >
-                商品のご案内
-              </NavLink>
-            </li>
-          </ul>
-          <div className='pl-[17%]'>
-            <Button
-              variant='outlined'
-              className='item-hover'
-              sx={{
-                letterSpacing: '5px',
-                px: 8,
-                py: 1,
-                fontWeight: '300',
-                borderColor: '#fff',
-                color: '#fff',
-                '&:hover': { borderColor: '#fff' },
-              }}
-            >
-              お問い合わせ
-            </Button>
-            <Typography
-              variant='body2'
-              gutterBottom
-              sx={{ mt: 3, color: '#fff' }}
-            >
-              お電話によるお問い合わせ
-            </Typography>
-            <Typography variant='h5' gutterBottom sx={{ color: '#fff' }}>
-              0267-41-2929
-            </Typography>
-            <Typography variant='body2' gutterBottom sx={{ color: '#fff' }}>
-              営業時間：10:00 - 18:00（季節変動あり）
-            </Typography>
-          </div>
-        </div>
-        <p className='max-w-[758px] flex items-center item-hover mx-auto border-3 border-double border-[#fff] py-3 px-3 mt-10'>
-          <img src={mailText} alt='mail magazine' />
-          <img src={iconMail} alt='' className='mx-4' />
-          <span className='text-[14px] text-[#fff] tracking-widest'>
-            酢重正之商店のメールマガジンでは、新商品やお得な情報をお届けしています。
-          </span>
-        </p>
-        <ul className='list-none p-0 m-0 flex justify-center gap-4 mt-10'>
-          <li>
-            <NavLink
-              to='/'
-              className='t-item-link text-[13px] p-0 tracking-widest'
-            >
-              商品のご案内
-            </NavLink>
-          </li>
-        </ul>
-        <p className='flex justify-center items-center text-[13px] text-[#fff]'>
-          COPYRIGHT
-          <CopyrightIcon fontSize='small' sx={{ mr: 2 }} />
-          2024 T-SHOP ALL RIGHTS RESERVED.
-        </p>
-      </div>
-    </div>
+      <Footer />
+    </Box>
   )
 }

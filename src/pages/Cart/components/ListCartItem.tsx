@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { Box, Button, Modal, Typography } from '@mui/material'
+import React, {useState} from 'react'
+import {Box, Button, Modal, Typography, useTheme} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { baseURL } from '~/constants/Api'
-import { NavLink } from 'react-router-dom'
-import { CartQuantity } from './CartQuantity'
-import { CartItem } from '~/model/CartModel'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '~/redux/store'
-import { removeFromCart } from '../CartSlice'
+import {baseURL} from '~/constants/Api'
+import {NavLink} from 'react-router-dom'
+import {CartQuantity} from './CartQuantity'
+import {CartItem} from '~/model/CartModel'
+import {useDispatch} from 'react-redux'
+import {AppDispatch} from '~/redux/store'
+import {removeFromCart} from '../CartSlice'
 
 interface listCartItem {
   cartItem: CartItem
@@ -26,11 +26,12 @@ const style = {
   borderRadius: '5px',
 }
 
-export const ListCartItem: React.FC<listCartItem> = ({ cartItem }) => {
+export const ListCartItem: React.FC<listCartItem> = ({cartItem}) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
+  const theme = useTheme()
   const dispatch = useDispatch<AppDispatch>()
 
   const handleRemoveItem = () => {
@@ -39,15 +40,35 @@ export const ListCartItem: React.FC<listCartItem> = ({ cartItem }) => {
   }
   return (
     <>
-      <Box sx={{ display: 'flex', gap: 3, maxWidth: '50%' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          gap: 3,
+          maxWidth: {md: '50%'},
+        }}
+      >
         <NavLink to={`/product/${cartItem.id}`}>
           <img
             src={`${baseURL}/images/${cartItem.product?.thumbnail}`}
             alt=''
-            className='w-[150px] h-[150px] object-cover'
+            style={{
+              width: '150px',
+              height: '150px',
+              objectFit: 'cover',
+              borderRadius: '5px',
+              border: '1px solid #444',
+            }}
           />
         </NavLink>
-        <Box>
+        <Box
+          sx={{
+            [theme.breakpoints.down('md')]: {
+              flexDirection: 'column',
+              alignItems: 'end',
+              display: 'flex',
+            },
+          }}
+        >
           <Typography
             variant='h2'
             sx={{
@@ -63,7 +84,7 @@ export const ListCartItem: React.FC<listCartItem> = ({ cartItem }) => {
             variant='contained'
             size='small'
             endIcon={<DeleteIcon />}
-            sx={{ opacity: '0.9' }}
+            sx={{opacity: '0.9'}}
             onClick={handleOpen}
           >
             削除
@@ -71,8 +92,30 @@ export const ListCartItem: React.FC<listCartItem> = ({ cartItem }) => {
         </Box>
       </Box>
       <Box>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant='h6' sx={{ mr: 5 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            [theme.breakpoints.down('md')]: {
+              alignItems: 'end',
+              flexDirection: 'column',
+            },
+          }}
+        >
+          <Typography
+            variant='h6'
+            sx={{
+              mr: 5,
+              [theme.breakpoints.down('sm')]: {
+                my: 4,
+                mr: 0,
+              },
+              [theme.breakpoints.down('md')]: {
+                mb: 1,
+                mr: 0,
+              },
+            }}
+          >
             {cartItem.product?.price
               ? (cartItem.product?.price * cartItem.quantity).toLocaleString()
               : 0}
@@ -98,14 +141,14 @@ export const ListCartItem: React.FC<listCartItem> = ({ cartItem }) => {
           >
             カートから商品を削除してよろしいですか?
           </Typography>
-          <Box sx={{ display: 'flex', alignItems: 'start', mt: 2 }}>
-            <Typography sx={{ minWidth: '60px' }}>商品 :</Typography>
+          <Box sx={{display: 'flex', alignItems: 'start', mt: 2}}>
+            <Typography sx={{minWidth: '60px'}}>商品 :</Typography>
             <Typography id='modal-modal-description'>
               {cartItem.product?.name}
             </Typography>
           </Box>
-          <Box sx={{ display: 'flex', alignItems: 'center', mt: 1 }}>
-            <Typography sx={{ minWidth: '60px' }}>
+          <Box sx={{display: 'flex', alignItems: 'center', mt: 1}}>
+            <Typography sx={{minWidth: '60px'}}>
               {cartItem.quantity}点 :
             </Typography>
             <Typography id='modal-modal-description'>
@@ -115,7 +158,7 @@ export const ListCartItem: React.FC<listCartItem> = ({ cartItem }) => {
               円
             </Typography>
           </Box>
-          <Box sx={{ mt: 7, display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{mt: 7, display: 'flex', justifyContent: 'space-between'}}>
             <Button
               variant='contained'
               sx={{

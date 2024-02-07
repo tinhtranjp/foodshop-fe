@@ -1,21 +1,21 @@
 import React from 'react'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Controller, useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { Box, TextField, Button, Typography } from '@mui/material'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {Controller, useForm} from 'react-hook-form'
+import {z} from 'zod'
+import {Box, TextField, Button, Typography} from '@mui/material'
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '~/redux/store'
-import { addToCart } from '~/pages/Cart/CartSlice'
-import { ProductDetail } from '~/model/ProductModel'
-import { toastSuccess2 } from '~/components/CustomToast'
+import {useDispatch} from 'react-redux'
+import {AppDispatch} from '~/redux/store'
+import {addToCart} from '~/pages/Cart/CartSlice'
+import {ProductDetail} from '~/model/ProductModel'
+import {toastSuccess2} from '~/components/CustomToast'
 
 interface cartFormProps {
   product: ProductDetail | undefined
 }
 
-export const AddtoCartForm: React.FC<cartFormProps> = ({ product }) => {
+export const AddtoCartForm: React.FC<cartFormProps> = ({product}) => {
   const dispatch = useDispatch<AppDispatch>()
 
   const schema = z.object({
@@ -35,7 +35,7 @@ export const AddtoCartForm: React.FC<cartFormProps> = ({ product }) => {
     handleSubmit,
     getValues,
     setValue,
-    formState: { errors },
+    formState: {errors},
   } = useForm({
     mode: 'onSubmit',
     resolver: zodResolver(schema),
@@ -44,7 +44,7 @@ export const AddtoCartForm: React.FC<cartFormProps> = ({ product }) => {
     },
   })
 
-  const handleAddToCartSubmit = async (values: { quantity: string }) => {
+  const handleAddToCartSubmit = async (values: {quantity: string}) => {
     const action = addToCart({
       id: product?.id,
       product: product,
@@ -87,11 +87,11 @@ export const AddtoCartForm: React.FC<cartFormProps> = ({ product }) => {
             />
           </span>
 
-          <Box sx={{ width: '100px', ml: 2, mr: '9px' }}>
+          <Box sx={{width: '100px', ml: 2, mr: '9px'}}>
             <Controller
               name='quantity'
               control={control}
-              render={({ field }) => (
+              render={({field}) => (
                 <TextField
                   {...field}
                   id='outlined'
@@ -100,7 +100,7 @@ export const AddtoCartForm: React.FC<cartFormProps> = ({ product }) => {
                     shrink: true,
                   }}
                   size='small'
-                  inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                  inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}}
                   error={!!errors.quantity}
                   sx={{
                     '& .css-6dog1p-MuiInputBase-input-MuiOutlinedInput-input': {
@@ -131,7 +131,7 @@ export const AddtoCartForm: React.FC<cartFormProps> = ({ product }) => {
             />
           </span>
         </Box>
-        <Typography variant='subtitle2' sx={{ color: 'red', mt: 2, ml: 2 }}>
+        <Typography variant='subtitle2' sx={{color: 'red', mt: 2, ml: 2}}>
           {errors.quantity ? errors.quantity.message : ''}
         </Typography>
         <Button
@@ -139,8 +139,8 @@ export const AddtoCartForm: React.FC<cartFormProps> = ({ product }) => {
           type='submit'
           sx={{
             mt: '30px',
-            padding: '15px 90px',
-            fontSize: '20px',
+            padding: {sm: '10px 20px', md: '15px 90px'},
+            fontSize: {xs: '14px', md: '20px'},
             fontWeight: '600',
             background: '#DD6541',
             opacity: '0.8',

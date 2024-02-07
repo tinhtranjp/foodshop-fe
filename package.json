@@ -28,6 +28,7 @@
     "react-toastify": "^10.0.3",
     "redux-persist": "^6.0.0",
     "slick-carousel": "^1.8.1",
+    "swiper": "^11.0.6",
     "swr": "^2.2.4",
     "zod": "^3.22.4"
   },

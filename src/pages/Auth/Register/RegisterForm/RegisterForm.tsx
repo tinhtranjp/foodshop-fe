@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
-import { Box } from '@mui/material'
+import {Box} from '@mui/material'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { schema } from '~/utils/validationRegister'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {schema} from '~/utils/validationRegister'
+import {useForm, Controller, SubmitHandler} from 'react-hook-form'
 import IconButton from '@mui/material/IconButton'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
@@ -15,15 +15,15 @@ import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import FormHelperText from '@mui/material/FormHelperText'
-import { RegisterModel } from '~/model/RegisterModel'
+import {RegisterModel} from '~/model/RegisterModel'
 import prefectures from '~/utils/Prefectures'
 import addressApi from '~/api/addressApi'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '~/redux/store'
-import { register } from '../../UserSlice'
-import { unwrapResult } from '@reduxjs/toolkit'
-import { ToastContainer } from 'react-toastify'
-import { toastError, toastSuccess } from '~/components/CustomToast'
+import {useDispatch} from 'react-redux'
+import {AppDispatch} from '~/redux/store'
+import {register} from '../../UserSlice'
+import {unwrapResult} from '@reduxjs/toolkit'
+import {ToastContainer} from 'react-toastify'
+import {toastError, toastSuccess} from '~/components/CustomToast'
 import CustomTextField from '~/components/InputFile/CustomTextField'
 
 //need Refacter
@@ -48,7 +48,7 @@ const RegisterForm: React.FC = () => {
     clearErrors,
     setValue,
     setError,
-    formState: { errors, isSubmitting },
+    formState: {errors, isSubmitting},
     reset,
   } = useForm({
     mode: 'onBlur',
@@ -80,16 +80,14 @@ const RegisterForm: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>()
 
   const onSubmit: SubmitHandler<RegisterModel> = async (data) => {
-    console.log('submit')
-
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { year, month, day, checkPassword, ...subData } = data
+    const {year, month, day, checkPassword, ...subData} = data
     const monthStr = month.toString().padStart(2, '0')
     const dayStr = day.toString().padStart(2, '0')
     const date_of_birth = `${year}-${monthStr}-${dayStr}`
 
-    const subData1 = { date_of_birth, ...subData }
-    const { post_id, prefecture, address1, address2, ...submitData } = subData1
+    const subData1 = {date_of_birth, ...subData}
+    const {post_id, prefecture, address1, address2, ...submitData} = subData1
 
     submitData.gender = Number(submitData.gender)
     submitData.email_accept = Number(submitData.email_accept)
@@ -156,7 +154,7 @@ const RegisterForm: React.FC = () => {
       }
       if (data && data.results && data.results.length > 0) {
         const res = data.results[0]
-        setValue('prefecture', res.address1, { shouldValidate: true })
+        setValue('prefecture', res.address1, {shouldValidate: true})
         setValue('address1', res.address2 + res.address3, {
           shouldValidate: true,
         })
@@ -169,11 +167,11 @@ const RegisterForm: React.FC = () => {
   return (
     <Box
       component='form'
-      sx={{ width: '100%' }}
+      sx={{width: '100%'}}
       onSubmit={handleSubmit(onSubmit)}
     >
       {/* full name */}
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{width: '80%', mx: 'auto'}}>
         <CustomTextField
           name='full_name'
           control={control}
@@ -184,7 +182,7 @@ const RegisterForm: React.FC = () => {
         />
       </Box>
       {/* furigana name */}
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{width: '80%', mx: 'auto'}}>
         <CustomTextField
           name='furigana_name'
           control={control}
@@ -195,11 +193,11 @@ const RegisterForm: React.FC = () => {
         />
       </Box>
       {/* Post */}
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{width: '80%', mx: 'auto'}}>
         <Controller
           name='post_id'
           control={control}
-          render={({ field }) => (
+          render={({field}) => (
             <TextField
               {...field}
               label='PostId'
@@ -213,27 +211,27 @@ const RegisterForm: React.FC = () => {
                 handleZipcodeChange(e)
               }}
               size='small'
-              sx={{ width: '45%' }}
+              sx={{width: '45%'}}
             />
           )}
         />
         <Button
           variant='contained'
-          sx={{ ml: '20px', background: '#eff2f4' }}
+          sx={{ml: '20px', background: '#eff2f4'}}
           onClick={handleButtonClick}
         >
           郵便番号から入力
         </Button>
-        <Typography variant='caption' component='p' sx={{ p: '5px 14px 16px' }}>
+        <Typography variant='caption' component='p' sx={{p: '5px 14px 16px'}}>
           例) 1000000
         </Typography>
       </Box>
       {/* adress 都道府県*/}
-      <Box sx={{ width: '80%', mx: 'auto', mb: '16px' }}>
+      <Box sx={{width: '80%', mx: 'auto', mb: '16px'}}>
         <Controller
           name='prefecture'
           control={control}
-          render={({ field }) => (
+          render={({field}) => (
             <TextField
               {...field}
               select
@@ -255,7 +253,7 @@ const RegisterForm: React.FC = () => {
         />
       </Box>
       {/* address1 市区町村、番地等*/}
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{width: '80%', mx: 'auto'}}>
         <CustomTextField
           name='address1'
           control={control}
@@ -266,7 +264,7 @@ const RegisterForm: React.FC = () => {
         />
       </Box>
       {/* address2 アパート・マンション名、部屋番号等*/}
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{width: '80%', mx: 'auto'}}>
         <CustomTextField
           name='address2'
           control={control}
@@ -277,7 +275,7 @@ const RegisterForm: React.FC = () => {
         />
       </Box>
       {/* Email */}
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{width: '80%', mx: 'auto'}}>
         <CustomTextField
           name='email'
           control={control}
@@ -287,7 +285,7 @@ const RegisterForm: React.FC = () => {
         />
       </Box>
       {/* Phone Number */}
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{width: '80%', mx: 'auto'}}>
         <CustomTextField
           name='phone_number'
           control={control}
@@ -299,7 +297,7 @@ const RegisterForm: React.FC = () => {
       </Box>
 
       {/* FAX */}
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{width: '80%', mx: 'auto'}}>
         <CustomTextField
           name='fax_number'
           control={control}
@@ -310,11 +308,11 @@ const RegisterForm: React.FC = () => {
         />
       </Box>
       {/* Gender */}
-      <Box sx={{ width: '80%', mx: 'auto', mb: '16px' }}>
+      <Box sx={{width: '80%', mx: 'auto', mb: '16px'}}>
         <Controller
           name='gender'
           control={control}
-          render={({ field }) => (
+          render={({field}) => (
             <TextField
               {...field}
               select
@@ -345,7 +343,7 @@ const RegisterForm: React.FC = () => {
         <Controller
           name='year'
           control={control}
-          render={({ field }) => (
+          render={({field}) => (
             <TextField
               {...field}
               label='生年月日 （必須）'
@@ -362,7 +360,7 @@ const RegisterForm: React.FC = () => {
         <Controller
           name='month'
           control={control}
-          render={({ field }) => (
+          render={({field}) => (
             <TextField
               {...field}
               select
@@ -371,9 +369,9 @@ const RegisterForm: React.FC = () => {
               error={!!errors.month}
               onFocus={() => handleFocus('month')}
               size='small'
-              sx={{ width: '15%' }}
+              sx={{width: '15%'}}
             >
-              {Array.from({ length: 12 }, (_, i) => (
+              {Array.from({length: 12}, (_, i) => (
                 <MenuItem key={i} value={(i + 1).toString()}>
                   {i + 1}
                 </MenuItem>
@@ -384,7 +382,7 @@ const RegisterForm: React.FC = () => {
         <Controller
           name='day'
           control={control}
-          render={({ field }) => (
+          render={({field}) => (
             <TextField
               {...field}
               select
@@ -393,9 +391,9 @@ const RegisterForm: React.FC = () => {
               error={!!errors.day}
               onFocus={() => handleFocus('day')}
               size='small'
-              sx={{ width: '15%' }}
+              sx={{width: '15%'}}
             >
-              {Array.from({ length: 31 }, (_, i) => (
+              {Array.from({length: 31}, (_, i) => (
                 <MenuItem key={i} value={(i + 1).toString()}>
                   {i + 1}
                 </MenuItem>
@@ -423,16 +421,16 @@ const RegisterForm: React.FC = () => {
       <Typography
         variant='caption'
         component='p'
-        sx={{ width: '80%', mx: 'auto', p: '10px 14px 16px' }}
+        sx={{width: '80%', mx: 'auto', p: '10px 14px 16px'}}
       >
         誕生年は4桁で指定してください 例) 1970
       </Typography>
 
-      <Box sx={{ width: '80%', mx: 'auto', mb: '16px' }}>
+      <Box sx={{width: '80%', mx: 'auto', mb: '16px'}}>
         <Controller
           name='email_accept'
           control={control}
-          render={({ field }) => (
+          render={({field}) => (
             <TextField
               {...field}
               select
@@ -456,12 +454,12 @@ const RegisterForm: React.FC = () => {
         variant='h6'
         component='h3'
         align='center'
-        sx={{ mt: '10x', mb: '30px', width: '100%' }}
+        sx={{mt: '10x', mb: '30px', width: '100%'}}
       >
         ユーザー登録
       </Typography>
       {/* Logister ID */}
-      <Box sx={{ width: '80%', mx: 'auto' }}>
+      <Box sx={{width: '80%', mx: 'auto'}}>
         <CustomTextField
           name='login_id'
           control={control}
@@ -475,9 +473,9 @@ const RegisterForm: React.FC = () => {
       <Controller
         name='pass_word'
         control={control}
-        render={({ field }) => (
+        render={({field}) => (
           <FormControl
-            sx={{ width: '80%', mx: 'auto', display: 'flex' }}
+            sx={{width: '80%', mx: 'auto', display: 'flex'}}
             size='small'
             variant='outlined'
           >
@@ -504,7 +502,7 @@ const RegisterForm: React.FC = () => {
               }
               label='パスワード （必須）'
             />
-            <FormHelperText sx={{ color: '#f44336' }}>
+            <FormHelperText sx={{color: '#f44336'}}>
               {errors.pass_word ? errors.pass_word.message : ''}
             </FormHelperText>
           </FormControl>
@@ -514,7 +512,7 @@ const RegisterForm: React.FC = () => {
       <Typography
         variant='caption'
         component='p'
-        sx={{ width: '80%', mx: 'auto', mt: '10px', p: '5px 14px' }}
+        sx={{width: '80%', mx: 'auto', mt: '10px', p: '5px 14px'}}
       >
         ※7～128文字の英数字、半角記号でご指定ください。
       </Typography>
@@ -522,9 +520,9 @@ const RegisterForm: React.FC = () => {
       <Controller
         name='checkPassword'
         control={control}
-        render={({ field }) => (
+        render={({field}) => (
           <FormControl
-            sx={{ width: '80%', mx: 'auto', display: 'flex' }}
+            sx={{width: '80%', mx: 'auto', display: 'flex'}}
             size='small'
             variant='outlined'
           >
@@ -551,13 +549,13 @@ const RegisterForm: React.FC = () => {
               }
               label='パスワード （必須）'
             />
-            <FormHelperText sx={{ color: '#f44336' }}>
+            <FormHelperText sx={{color: '#f44336'}}>
               {errors.checkPassword ? errors.checkPassword.message : ''}
             </FormHelperText>
           </FormControl>
         )}
       />
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{width: '100%'}}>
         <Button
           variant='contained'
           type='submit'

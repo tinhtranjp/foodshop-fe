@@ -4,7 +4,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import { Box, CardActionArea } from '@mui/material'
+import {Box, CardActionArea} from '@mui/material'
 import Rating from '@mui/material/Rating'
 
 interface Cart {
@@ -18,16 +18,22 @@ interface Cart {
 }
 
 const ProductItem: React.FC<Cart> = (props) => {
-  const { img, alt, title, desc, price, height, minHeight } = props
+  const {img, alt, title, desc, price, height, minHeight} = props
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card>
       <CardActionArea>
         <CardMedia component='img' height={height} image={img} alt={alt} />
         <CardContent className={minHeight}>
           <Typography gutterBottom variant='subtitle1' component='h2'>
             {title}
           </Typography>
-          <Typography variant='body2' color='text.secondary' sx={{ my: '8px' }}>
+          <Typography
+            variant='body2'
+            color='text.secondary'
+            sx={{
+              my: '8px',
+            }}
+          >
             {desc}
           </Typography>
           <Box
@@ -44,7 +50,7 @@ const ProductItem: React.FC<Cart> = (props) => {
               name='read-only'
               value={5}
               readOnly
-              sx={{ fontSize: '20px' }}
+              sx={{fontSize: {xs: '15px', sm: '20px'}}}
             />
           </Box>
         </CardContent>

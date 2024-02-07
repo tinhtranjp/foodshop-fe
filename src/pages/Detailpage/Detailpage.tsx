@@ -1,22 +1,22 @@
-import { Box } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import {Box} from '@mui/material'
+import React, {useEffect, useState} from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
-import { CarouselDetail } from '~/pages/Detailpage/Components/CarouselDetail'
-import { InforDetail } from './Components/InforDetail'
-import { useParams } from 'react-router-dom'
-import { fetcherData } from '~/api/axiosClient'
+import {CarouselDetail} from '~/pages/Detailpage/Components/CarouselDetail'
+import {InforDetail} from './Components/InforDetail'
+import {useParams} from 'react-router-dom'
+import {fetcherData} from '~/api/axiosClient'
 import useSWR from 'swr'
-import { ProductDetail } from '~/model/ProductModel'
+import {ProductDetail} from '~/model/ProductModel'
 import productApi from '~/api/productApi'
-import { listProductImgModel } from '~/model/ProductModel'
-import { ToastContainer } from 'react-toastify'
+import {listProductImgModel} from '~/model/ProductModel'
+import {ToastContainer} from 'react-toastify'
 const Detailpage: React.FC = () => {
-  const { productId } = useParams()
+  const {productId} = useParams()
 
   const [listImg, setListImg] = useState<listProductImgModel[]>([])
 
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    window.scrollTo({top: 0})
   }, [])
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const Detailpage: React.FC = () => {
     fetchData()
   }, [productId])
 
-  const { data, error, isLoading } = useSWR<ProductDetail | undefined>(
+  const {data, error, isLoading} = useSWR<ProductDetail | undefined>(
     `products/${productId}`,
     fetcherData,
   )
@@ -42,13 +42,13 @@ const Detailpage: React.FC = () => {
   if (error) return <h1 className='pt-[100px]'>Error ban oi...</h1>
 
   return (
-    <Box sx={{ pt: '65px' }}>
-      <Box sx={{ py: '60px', background: '#F4F2EF' }}>
-        <Grid container spacing={2} sx={{ width: '1060px', mx: 'auto' }}>
-          <Grid xs={7}>
+    <Box sx={{pt: '65px'}}>
+      <Box sx={{py: '60px', background: '#F4F2EF'}}>
+        <Grid container spacing={2} sx={{width: {lg: '1060px'}, mx: 'auto'}}>
+          <Grid lg={7} sm={6}>
             <CarouselDetail listImg={listImg} />
           </Grid>
-          <Grid xs={5}>
+          <Grid lg={5} sm={4}>
             <InforDetail product={data} />
           </Grid>
         </Grid>

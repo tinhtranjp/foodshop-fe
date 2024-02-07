@@ -1,14 +1,14 @@
-import { Box, Button, Typography } from '@mui/material'
-import React, { useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '~/redux/store'
+import {Box, Button, Typography} from '@mui/material'
+import React, {useRef, useState} from 'react'
+import {useSelector} from 'react-redux'
+import {RootState} from '~/redux/store'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import TextField from '@mui/material/TextField'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import {zodResolver} from '@hookform/resolvers/zod'
+import {useForm, Controller, SubmitHandler} from 'react-hook-form'
 import IconButton from '@mui/material/IconButton'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
@@ -17,15 +17,15 @@ import FormControl from '@mui/material/FormControl'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import FormHelperText from '@mui/material/FormHelperText'
-import { z } from 'zod'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '~/redux/store'
-import { unwrapResult } from '@reduxjs/toolkit'
-import { toastError } from '~/components/CustomToast'
-import { login } from '~/pages/Auth/UserSlice'
-import { LoginModel } from '~/model/UserModel'
-import { useNavigate } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
+import {z} from 'zod'
+import {useDispatch} from 'react-redux'
+import {AppDispatch} from '~/redux/store'
+import {unwrapResult} from '@reduxjs/toolkit'
+import {toastError} from '~/components/CustomToast'
+import {login} from '~/pages/Auth/UserSlice'
+import {LoginModel} from '~/model/UserModel'
+import {useNavigate} from 'react-router-dom'
+import {ToastContainer} from 'react-toastify'
 import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
 
@@ -88,7 +88,7 @@ export const CartInfor = () => {
     clearErrors,
     setError,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: {errors, isSubmitting},
   } = useForm({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -135,7 +135,7 @@ export const CartInfor = () => {
             justifyContent: 'space-between',
           }}
         >
-          <Typography sx={{ maxWidth: '60%' }}>ログインから進みます</Typography>
+          <Typography sx={{maxWidth: '60%'}}>ログインから進みます</Typography>
           <Button variant='contained' onClick={handleClickOpen}>
             Login
           </Button>
@@ -146,7 +146,7 @@ export const CartInfor = () => {
             onClose={handleClose}
             aria-labelledby='alert-dialog-title'
             aria-describedby='alert-dialog-description'
-            sx={{ top: '-15%' }}
+            sx={{top: '-15%'}}
           >
             <Box
               sx={{
@@ -161,7 +161,7 @@ export const CartInfor = () => {
               </DialogTitle>
               <NavLink
                 to='/register'
-                style={{ color: 'rgb(65, 131, 196)', textDecoration: 'none' }}
+                style={{color: 'rgb(65, 131, 196)', textDecoration: 'none'}}
                 className='customNavLink'
               >
                 会員登録する
@@ -170,15 +170,15 @@ export const CartInfor = () => {
             <DialogContent>
               <Box
                 component='form'
-                sx={{ width: '500px' }}
+                sx={{width: '500px'}}
                 onSubmit={handleSubmit(onSubmit)}
               >
                 {/* full name */}
-                <Box sx={{ width: '80%', mx: 'auto' }}>
+                <Box sx={{width: '80%', mx: 'auto'}}>
                   <Controller
                     name='login_id'
                     control={control}
-                    render={({ field }) => (
+                    render={({field}) => (
                       <TextField
                         {...field}
                         label='お名前（必須）'
@@ -197,7 +197,7 @@ export const CartInfor = () => {
                 <Controller
                   name='pass_word'
                   control={control}
-                  render={({ field }) => (
+                  render={({field}) => (
                     <FormControl
                       sx={{
                         width: '80%',
@@ -235,7 +235,7 @@ export const CartInfor = () => {
                         }
                         label='パスワード （必須）'
                       />
-                      <FormHelperText sx={{ color: '#f44336' }}>
+                      <FormHelperText sx={{color: '#f44336'}}>
                         {errors.pass_word ? errors.pass_word.message : ''}
                       </FormHelperText>
                     </FormControl>
@@ -253,7 +253,7 @@ export const CartInfor = () => {
                 >
                   パスワードを忘れた方はこちら
                 </NavLink>
-                <Box sx={{ width: '100%', pt: '30px' }}>
+                <Box sx={{width: '100%', pt: '30px'}}>
                   <Button
                     variant='contained'
                     type='submit'
@@ -274,7 +274,7 @@ export const CartInfor = () => {
             </DialogContent>
           </Dialog>
           <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
             open={openBackdrop}
             onClick={handleCloseBackdrop}
           >
@@ -314,7 +314,7 @@ export const CartInfor = () => {
         {user?.full_name.toLocaleUpperCase()}
       </Typography>
       <Typography>携帯電話: {user?.phone_number}</Typography>
-      <Typography sx={{ my: '2px' }}>{user?.email}</Typography>
+      <Typography sx={{my: '2px'}}>{user?.email}</Typography>
       <Typography variant='subtitle1'>{`${address?.post_id} - ${address?.prefecture} ${address?.address1} ${address?.address2}`}</Typography>
     </Box>
   )

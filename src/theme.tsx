@@ -1,7 +1,10 @@
 import './theme-augmentation'
-import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
+import {experimental_extendTheme as extendTheme} from '@mui/material/styles'
 
 const theme = extendTheme({
+  tCustom: {
+    navTopHeight: '65px',
+  },
   colorSchemes: {
     light: {
       palette: {
