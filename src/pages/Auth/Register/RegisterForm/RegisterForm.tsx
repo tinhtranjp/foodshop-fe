@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import TextField from '@mui/material/TextField'
 import MenuItem from '@mui/material/MenuItem'
-import {Box} from '@mui/material'
+import {Box, useTheme} from '@mui/material'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import {zodResolver} from '@hookform/resolvers/zod'
@@ -42,6 +42,7 @@ const RegisterForm: React.FC = () => {
   ) => {
     event.preventDefault()
   }
+  const theme = useTheme()
   const {
     control,
     handleSubmit,
@@ -193,7 +194,17 @@ const RegisterForm: React.FC = () => {
         />
       </Box>
       {/* Post */}
-      <Box sx={{width: '80%', mx: 'auto'}}>
+      <Box
+        sx={{
+          width: '80%',
+          mx: 'auto',
+          [theme.breakpoints.down('sm')]: {
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+          },
+        }}
+      >
         <Controller
           name='post_id'
           control={control}
@@ -211,13 +222,13 @@ const RegisterForm: React.FC = () => {
                 handleZipcodeChange(e)
               }}
               size='small'
-              sx={{width: '45%'}}
+              sx={{width: {sm: '45%'}}}
             />
           )}
         />
         <Button
           variant='contained'
-          sx={{ml: '20px', background: '#eff2f4'}}
+          sx={{ml: {sm: '20px'}, background: '#222'}}
           onClick={handleButtonClick}
         >
           郵便番号から入力
@@ -352,7 +363,7 @@ const RegisterForm: React.FC = () => {
               onFocus={() => handleFocus('year')}
               size='small'
               sx={{
-                width: '30%',
+                width: '40%',
               }}
             />
           )}
@@ -369,7 +380,12 @@ const RegisterForm: React.FC = () => {
               error={!!errors.month}
               onFocus={() => handleFocus('month')}
               size='small'
-              sx={{width: '15%'}}
+              sx={{
+                width: {sm: '15%'},
+                '& .css-1i1js26-MuiSvgIcon-root-MuiSelect-icon': {
+                  display: {xs: 'none', sm: 'block'},
+                },
+              }}
             >
               {Array.from({length: 12}, (_, i) => (
                 <MenuItem key={i} value={(i + 1).toString()}>
@@ -391,7 +407,12 @@ const RegisterForm: React.FC = () => {
               error={!!errors.day}
               onFocus={() => handleFocus('day')}
               size='small'
-              sx={{width: '15%'}}
+              sx={{
+                width: {sm: '15%'},
+                '& .css-1i1js26-MuiSvgIcon-root-MuiSelect-icon': {
+                  display: {xs: 'none', sm: 'block'},
+                },
+              }}
             >
               {Array.from({length: 31}, (_, i) => (
                 <MenuItem key={i} value={(i + 1).toString()}>

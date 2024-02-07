@@ -1,4 +1,4 @@
-import {Box, Button, Typography} from '@mui/material'
+import {Box, Button, Typography, useTheme} from '@mui/material'
 import React, {useRef, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {RootState} from '~/redux/store'
@@ -44,7 +44,7 @@ export const CartInfor = () => {
   const [openBackdrop, setOpenBackdrop] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
-
+  const theme = useTheme()
   const handleClickShowPassword = () => setShowPassword((show) => !show)
 
   const user = useSelector((state: RootState) => state.user.current.user)
@@ -154,6 +154,11 @@ export const CartInfor = () => {
                 alignItems: 'baseline',
                 justifyContent: 'space-between',
                 paddingRight: '25px',
+                [theme.breakpoints.down('sm')]: {
+                  flexDirection: 'column',
+                  paddingRight: '0px',
+                  alignItems: 'center',
+                },
               }}
             >
               <DialogTitle id='alert-dialog-title'>
@@ -170,7 +175,7 @@ export const CartInfor = () => {
             <DialogContent>
               <Box
                 component='form'
-                sx={{width: '500px'}}
+                sx={{width: {sm: '500px'}}}
                 onSubmit={handleSubmit(onSubmit)}
               >
                 {/* full name */}

@@ -1,7 +1,9 @@
 import {Button, Stack, TextField} from '@mui/material'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import SearchIcon from '@mui/icons-material/Search'
+import {useNavigate} from 'react-router-dom'
 export const InputGroup = () => {
+  const navige = useNavigate()
   return (
     <Stack
       direction='row'
@@ -9,6 +11,9 @@ export const InputGroup = () => {
       sx={{display: 'flex', flexDirection: 'column', gap: '16px'}}
     >
       <Button
+        onClick={() => {
+          navige('/login')
+        }}
         variant='outlined'
         endIcon={
           <ArrowRightIcon
@@ -26,6 +31,9 @@ export const InputGroup = () => {
           />
         }
         className='inputXs'
+        onClick={() => {
+          navige('/register')
+        }}
       >
         新規登録
       </Button>

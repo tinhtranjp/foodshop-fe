@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography'
-import { useTheme } from '@mui/material/styles'
-import { Box } from '@mui/material'
+import {useTheme} from '@mui/material/styles'
+import {Box} from '@mui/material'
 import siteSeal from '~/assets/img/siteSealImage.png'
 
 export default function Footer() {
@@ -14,7 +14,7 @@ export default function Footer() {
         sx={{
           color: theme.palette.textColor.primary,
           padding: '20px 0',
-          width: '700px',
+          width: {md: '700px'},
           margin: '0 auto',
           fontSize: '12px',
         }}
@@ -23,13 +23,13 @@ export default function Footer() {
       </Typography>
       <Box
         sx={{
-          width: '550px',
+          width: {sm: '550px'},
           display: 'flex',
           alignItems: 'start',
           mx: 'auto',
         }}
       >
-        <a href='#!' style={{ width: '155px', height: '57px' }}>
+        <a href='#!' style={{width: '155px', height: '57px'}}>
           <img
             src={siteSeal}
             alt='GMO GlobalSign secure'
@@ -43,7 +43,7 @@ export default function Footer() {
         <Typography
           variant='caption'
           component='p'
-          sx={{ fontSize: '12px', ml: '2px' }}
+          sx={{fontSize: '12px', ml: '2px'}}
         >
           当サイトでは、通信情報の暗号化と実在性の証明のため、GMOグローバルサイン株式会社のSSLサーバ証明書を使用しております。
           セキュアシールより、サーバ証明書の検証結果をご確認ください。
