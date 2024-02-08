@@ -1,4 +1,4 @@
-import {Box, Grid, Pagination, Paper, useTheme} from '@mui/material'
+import {Box, Grid, Pagination, Paper} from '@mui/material'
 import {useEffect, useMemo} from 'react'
 import productApi from '~/api/productApi'
 import React, {useState} from 'react'
@@ -24,7 +24,6 @@ export default function Product() {
     page: 1,
   })
 
-  const theme = useTheme()
   const location = useLocation()
   const navigate = useNavigate()
   const queryParams = useMemo(() => {
@@ -64,6 +63,8 @@ export default function Product() {
     event: React.ChangeEvent<unknown>,
     page: number,
   ) => {
+    console.log(event)
+
     const filters = {
       ...queryParams,
       page: page,
@@ -124,7 +125,7 @@ export default function Product() {
       <Box
         sx={{
           paddingTop: '100px',
-          px: {sm: '3%', lg: '10%'},
+          px: {sm: '3%', lg: '5%'},
           paddingBottom: '5%',
           backgroundColor: (theme) => theme.palette.customBg.secondary,
         }}

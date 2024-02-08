@@ -1,11 +1,10 @@
 import {useSelector} from 'react-redux'
 import {RootState} from '~/redux/store'
 import {ListCartItem} from './ListCartItem'
-import {Box, Typography, useTheme} from '@mui/material'
+import {Box, Typography} from '@mui/material'
 
 export const ListCart = () => {
   const cartItemList = useSelector((state: RootState) => state.cart.cartItems)
-  const theme = useTheme()
   return (
     <div>
       <ul className='no-underline list-none m-0 p-0'>

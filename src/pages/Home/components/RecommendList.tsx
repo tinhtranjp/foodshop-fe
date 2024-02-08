@@ -5,9 +5,7 @@ import {fetcherData} from '~/api/axiosClient'
 import {ResponProduct} from '~/model/ProductModel'
 import {baseURL} from '~/constants/Api'
 import Grid from '@mui/material/Unstable_Grid2'
-import {useTheme} from '@mui/material'
 const RecommendList = () => {
-  const theme = useTheme()
   const {data, error, isLoading} = useSWR<ResponProduct>(
     'products?page=1&limit=10',
     fetcherData,

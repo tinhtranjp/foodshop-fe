@@ -1,4 +1,3 @@
-import React, {useRef, useState} from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/effect-fade'
@@ -6,12 +5,14 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import '~/assets/style/styeles.css'
 import {EffectFade, Navigation, Pagination, Autoplay} from 'swiper/modules'
-import LucKyTuyet1 from '~/assets/img/576a8be1e0496ebc78a2bd5321ed0f37.jpg'
-import LucKyTuyet2 from '~/assets/img/8f71d41a7b35ce7194642ffd813a3983.jpg'
-import LucKyTuyet3 from '~/assets/img/__lu_xueqi_zhu_xian_drawn_by_liang_zi_n_a__sample-4111c34138ef943871d93a93373b9117.jpg'
-import LucKyTuyet4 from '~/assets/img/luc-tuyet-ky-2.jpeg'
-import LucKyTuyet5 from '~/assets/img/luc-tuyet-ky-3.jpg'
 import {Box} from '@mui/material'
+import img1 from '~/assets/img/1.jpg'
+import img2 from '~/assets/img/2.png'
+import img3 from '~/assets/img/3.png'
+import img4 from '~/assets/img/4.png'
+import img5 from '~/assets/img/5.jpeg'
+import img6 from '~/assets/img/6.jpg'
+import img7 from '~/assets/img/7.jpg'
 
 export default function HomeCarousel() {
   return (
@@ -35,35 +36,49 @@ export default function HomeCarousel() {
           <Box
             sx={{height: 'calc(100vh - 65px)', maxHeight: 'calc(100vh - 65px)'}}
           >
-            <img src={LucKyTuyet1} />
+            <img src={img1} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box
             sx={{height: 'calc(100vh - 65px)', maxHeight: 'calc(100vh - 65px)'}}
           >
-            <img src={LucKyTuyet2} />
+            <img src={img2} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box
             sx={{height: 'calc(100vh - 65px)', maxHeight: 'calc(100vh - 65px)'}}
           >
-            <img src={LucKyTuyet3} />
+            <img src={img3} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box
             sx={{height: 'calc(100vh - 65px)', maxHeight: 'calc(100vh - 65px)'}}
           >
-            <img src={LucKyTuyet4} />
+            <img src={img4} />
           </Box>
         </SwiperSlide>
         <SwiperSlide>
           <Box
             sx={{height: 'calc(100vh - 65px)', maxHeight: 'calc(100vh - 65px)'}}
           >
-            <img src={LucKyTuyet5} />
+            <img src={img5} />
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Box
+            sx={{height: 'calc(100vh - 65px)', maxHeight: 'calc(100vh - 65px)'}}
+          >
+            <img src={img6} />
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Box
+            sx={{height: 'calc(100vh - 65px)', maxHeight: 'calc(100vh - 65px)'}}
+          >
+            <img src={img7} />
           </Box>
         </SwiperSlide>
       </Swiper>

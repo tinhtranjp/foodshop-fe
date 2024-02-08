@@ -14,6 +14,8 @@ function ProductSort(props: ItemProps) {
     event: React.ChangeEvent<unknown>,
     newValue: string,
   ) => {
+    console.log(event)
+
     if (onChange) onChange(newValue)
   }
 
@@ -26,8 +28,22 @@ function ProductSort(props: ItemProps) {
         indicatorColor='secondary'
         aria-label='secondary tabs example'
       >
-        <Tab label='高格順' value='asc'></Tab>
-        <Tab label='安格順' value='desc'></Tab>
+        <Tab
+          label='高格順'
+          sx={{
+            fontSize: {md: '22px'},
+            letterSpacing: {md: '2px'},
+          }}
+          value='asc'
+        ></Tab>
+        <Tab
+          label='安格順'
+          sx={{
+            fontSize: {md: '22px'},
+            letterSpacing: {md: '2px'},
+          }}
+          value='desc'
+        ></Tab>
       </Tabs>
     </Box>
   )

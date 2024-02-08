@@ -4,7 +4,6 @@ import RegisterRoutes from './Register'
 import LoginRoutes from './Login'
 import ProductRouter from './Product'
 import Cart from './Cart'
-import HomeCarousel from '~/components/HomeCarousel'
 import {Test} from '~/utils/test'
 const router = createBrowserRouter([
   ...HomeRoutes,

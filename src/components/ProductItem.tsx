@@ -22,7 +22,13 @@ const ProductItem: React.FC<Cart> = (props) => {
   return (
     <Card>
       <CardActionArea>
-        <CardMedia component='img' height={height} image={img} alt={alt} />
+        <CardMedia
+          component='img'
+          height={height}
+          image={img}
+          sx={{objectFit: 'contain'}}
+          alt={alt}
+        />
         <CardContent className={minHeight}>
           <Typography gutterBottom variant='subtitle1' component='h2'>
             {title}

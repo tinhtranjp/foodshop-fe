@@ -1,4 +1,4 @@
-import {Box, Stack, Typography, Slide} from '@mui/material'
+import {Box, Stack, Typography} from '@mui/material'
 import {InputGroup} from './InputGroup'
 import Grid from '@mui/material/Unstable_Grid2'
 import {NavSubMobile} from './NavSubMobile'

@@ -1,6 +1,6 @@
-import { Box, Button, TextField, Typography } from '@mui/material'
-import { useState } from 'react'
-import { FiltersModel } from '~/model/FiltersModel'
+import {Box, Button, TextField, Typography} from '@mui/material'
+import {useState} from 'react'
+import {FiltersModel} from '~/model/FiltersModel'
 
 interface FilterByPriceProps {
   onChange: (values: FiltersModel) => void
@@ -10,14 +10,14 @@ interface FilterValues {
   min_price: number
   max_price: number
 }
-const FilterByPrice: React.FC<FilterByPriceProps> = ({ onChange }) => {
+const FilterByPrice: React.FC<FilterByPriceProps> = ({onChange}) => {
   const [values, setValues] = useState<FilterValues>({
     min_price: 0,
     max_price: 0,
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const {name, value} = e.target
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
@@ -32,12 +32,12 @@ const FilterByPrice: React.FC<FilterByPriceProps> = ({ onChange }) => {
     }
   }
   const handleReset = () => {
-    setValues({ min_price: 0, max_price: 0 })
-    if (onChange) onChange({ min_price: 0, max_price: 0 })
+    setValues({min_price: 0, max_price: 0})
+    if (onChange) onChange({min_price: 0, max_price: 0})
   }
   return (
     <div>
-      <Box sx={{ p: 3 }}>
+      <Box sx={{p: 3}}>
         <Typography variant='subtitle2'>Price</Typography>
         <Box>
           <TextField
@@ -50,7 +50,7 @@ const FilterByPrice: React.FC<FilterByPriceProps> = ({ onChange }) => {
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             size='small'
-            sx={{ my: 2 }}
+            sx={{my: 2}}
           />
           <TextField
             id='standard-max_price'
@@ -64,13 +64,13 @@ const FilterByPrice: React.FC<FilterByPriceProps> = ({ onChange }) => {
             size='small'
           />
         </Box>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', pr: 4 }}>
+        <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
           <Button
             variant='contained'
             size='small'
             color='primary'
             onClick={handleSubmit}
-            sx={{ mt: 3 }}
+            sx={{mt: 3}}
           >
             Submit
           </Button>
@@ -80,7 +80,7 @@ const FilterByPrice: React.FC<FilterByPriceProps> = ({ onChange }) => {
             size='small'
             color='primary'
             onClick={handleReset}
-            sx={{ mt: 3 }}
+            sx={{mt: 3}}
           >
             Reset
           </Button>

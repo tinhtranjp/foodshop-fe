@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material'
+import {Box, Grid} from '@mui/material'
 import React from 'react'
 import Skeleton from '@mui/material/Skeleton'
 
@@ -6,14 +6,14 @@ interface propsItem {
   length: number
 }
 
-const ProductSkeletonList: React.FC<propsItem> = ({ length }) => {
+const ProductSkeletonList: React.FC<propsItem> = ({length}) => {
   return (
     <div>
       <Box>
         <Grid container>
-          {Array.from(new Array(length)).map((x, index) => (
+          {Array.from(new Array(length)).map((_, index) => (
             <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-              <Box padding={1} sx={{ minHeight: '190px' }}>
+              <Box padding={1} sx={{minHeight: '190px'}}>
                 <Skeleton variant='rectangular' width='100%' height={118} />
                 <Skeleton />
                 <Skeleton />

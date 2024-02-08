@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import userApi from '~/api/userApi'
-import { UserModel, LoginModel, LoginResponse } from '~/model/UserModel'
+import {UserModel, LoginModel, LoginResponse} from '~/model/UserModel'
 
 export const register = createAsyncThunk(
   'users/register',
@@ -31,6 +31,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(register.fulfilled, (state, action) => {
+      console.log(state, action)
     })
 
     builder.addCase(login.fulfilled, (state, action) => {
@@ -42,7 +43,7 @@ const userSlice = createSlice({
   },
 })
 
-const { reducer, actions } = userSlice
+const {reducer, actions} = userSlice
 
-export const { resetCurrentUser } = actions
+export const {resetCurrentUser} = actions
 export default reducer
