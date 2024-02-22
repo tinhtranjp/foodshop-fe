@@ -17,6 +17,7 @@ export default function Footer() {
   const {data, error} = useSWR<CategoryModel[]>('categories', fetcherData)
   if (error) return <div>failed to load</div>
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const theme = useTheme()
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value)
@@ -133,7 +134,7 @@ export default function Footer() {
             <Typography
               component='h2'
               sx={{
-                ml: {xs: '50px', md: '0'},
+                ml: {xs: '0', md: '0'},
                 margin: 0,
                 display: 'flex',
                 alignItems: 'center',

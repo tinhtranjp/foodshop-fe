@@ -4,17 +4,16 @@ import RegisterRoutes from './Register'
 import LoginRoutes from './Login'
 import ProductRouter from './Product'
 import Cart from './Cart'
-import {Test} from '~/utils/test'
+import AdminRouter from '~/routes/Admin'
+import OrderRouter from './Order'
 const router = createBrowserRouter([
   ...HomeRoutes,
   ...RegisterRoutes,
   ...LoginRoutes,
   ...ProductRouter,
   ...Cart,
-  {
-    path: '/test',
-    element: <Test />,
-  },
+  ...AdminRouter,
+  ...OrderRouter,
 ])
 
 export default router

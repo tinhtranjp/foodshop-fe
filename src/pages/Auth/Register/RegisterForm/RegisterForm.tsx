@@ -43,6 +43,7 @@ const RegisterForm: React.FC = () => {
     event.preventDefault()
   }
   const theme = useTheme()
+
   const {
     control,
     handleSubmit,
@@ -75,6 +76,7 @@ const RegisterForm: React.FC = () => {
       email_accept: '',
     },
   })
+
   const handleFocus = (name: keyof RegisterModel) => {
     clearErrors(name)
   }
