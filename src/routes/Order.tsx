@@ -1,5 +1,6 @@
 import DefaultLayout from '~/layout/DefaultLayout'
 import Order from '~/pages/Order/Order'
+import OrderResult from '~/pages/Order/components/OrderResult'
 
 const OrderRouter = [
   {
@@ -10,6 +11,7 @@ const OrderRouter = [
         path: '',
         element: <Order />,
       },
+      {path: 'result', element: <OrderResult />},
     ],
   },
 ]

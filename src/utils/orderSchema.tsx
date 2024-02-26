@@ -1,6 +1,37 @@
 import {z} from 'zod'
 
 const orderSchema = z.object({
+  full_name: z.string().refine(
+    (value) => {
+      const validation = value.trim().length > 0 && value.trim().length < 4
+      return !validation
+    },
+    {
+      message: 'Yeu cau nhap 4 ky tu tro len',
+    },
+  ),
+  email: z.string().refine(
+    (value) => {
+      const trimmedValue = value.trim()
+      if (trimmedValue === '') {
+        return true
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      return emailRegex.test(trimmedValue)
+    },
+    {
+      message: 'Email không hợp lệ',
+    },
+  ),
+  shipping_address: z.string().refine(
+    (value) => {
+      const validation = value.trim().length > 0 && value.trim().length < 4
+      return !validation
+    },
+    {
+      message: 'Yeu cau nhap 4 ky tu tro len',
+    },
+  ),
   phone_number: z
     .string()
     .nonempty('こちらの項目は必死です。')
@@ -22,15 +53,9 @@ const orderSchema = z.object({
         message: '10文字以上、入力してください。',
       },
     ),
-  shipping_address: z.string().nonempty('こちらの項目は必死です。'),
   shipping_method: z.string().nonempty('こちらの項目は必死です。'),
-  year: z
-    .string()
-    .nonempty('こちらの項目は必死です。')
-    .regex(/^\d{4}$/, '年は４文字でお願いします。'),
-  month: z.string().nonempty('*'),
-  day: z.string().nonempty('*'),
   payment_method: z.string().nonempty('こちらの項目は必死です。'),
+  note: z.string(),
 })
 
 export default orderSchema

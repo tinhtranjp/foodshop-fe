@@ -34,6 +34,7 @@ export const SelectInput = <T extends FieldValues>({
       control={control}
       render={({field}) => (
         <TextField
+          sx={{py: '10px'}}
           id={id}
           select
           label={label}

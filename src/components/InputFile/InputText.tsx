@@ -8,10 +8,12 @@ type InputProps<T extends FieldValues> = {
   size?: 'small' | 'medium'
   error?: string
   control: Control<T>
+  text?: string
 }
 
-export const InputTest = <T extends FieldValues>({
+export const InputText = <T extends FieldValues>({
   name,
+  text,
   label,
   error,
   control,
@@ -22,7 +24,7 @@ export const InputTest = <T extends FieldValues>({
       name={name}
       control={control}
       render={({field}) => (
-        <FormControl sx={{width: '100%', py: 2}}>
+        <FormControl sx={{width: '100%', py: '10px'}}>
           <TextField
             name={name}
             label={label}
@@ -30,6 +32,7 @@ export const InputTest = <T extends FieldValues>({
             onChange={field.onChange}
             onBlur={field.onBlur}
             size={size || 'medium'}
+            helperText={text ? text : ''}
           />
           {error && <FormHelperText error>{error}</FormHelperText>}
         </FormControl>

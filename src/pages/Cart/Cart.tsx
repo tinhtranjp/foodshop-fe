@@ -10,6 +10,7 @@ import {CartInfor} from './components/CartInfor'
 import {CartTotal} from './components/CartTotal'
 import Button from '@mui/material/Button'
 import {RootState} from '~/redux/store'
+import {useNavigate} from 'react-router-dom'
 const Item = styled(Paper)(({theme}) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -19,6 +20,7 @@ const Item = styled(Paper)(({theme}) => ({
 export const Cart = () => {
   const cartItemsCount = useSelector(cartItemsCountSelector)
   const user = useSelector((state: RootState) => state.user.current.user)
+  const navigate = useNavigate()
 
   useEffect(() => {
     window.scrollTo({top: 0})
@@ -49,6 +51,9 @@ export const Cart = () => {
             {user && (
               <Button
                 variant='contained'
+                onClick={() => {
+                  navigate('/order')
+                }}
                 sx={{
                   mt: 3,
                   width: '100%',

@@ -10,6 +10,8 @@ import {persistor, store} from './redux/store'
 import {StyledEngineProvider} from '@mui/material/styles'
 import './index.css'
 import {PersistGate} from 'redux-persist/integration/react'
+import {LocalizationProvider} from '@mui/x-date-pickers'
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -18,7 +20,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <CssBaseline />
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <RouterProvider router={router} />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <RouterProvider router={router} />
+            </LocalizationProvider>
           </PersistGate>
         </Provider>
       </CssVarsProvider>

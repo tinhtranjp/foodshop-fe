@@ -3,7 +3,7 @@ import {styled} from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import Grid from '@mui/material/Unstable_Grid2'
 import {OrderForm} from './components/OrderForm'
-// import CustomTextField from '~/components/InputFile/CustomTextField'
+import OrderList from './components/OrderList'
 
 const Item = styled(Paper)(({theme}) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -41,6 +41,7 @@ export default function Order() {
               <Typography component='h2' variant='h4' fontWeight={600}>
                 ショッピングカート
               </Typography>
+              <OrderList />
             </Item>
           </Grid>
         </Grid>
