@@ -9,6 +9,7 @@ type InputProps<T extends FieldValues> = {
   error?: string
   control: Control<T>
   text?: string
+  onFocus?: () => void
 }
 
 export const InputText = <T extends FieldValues>({
@@ -18,6 +19,7 @@ export const InputText = <T extends FieldValues>({
   error,
   control,
   size,
+  onFocus,
 }: InputProps<T>) => {
   return (
     <Controller
@@ -33,6 +35,7 @@ export const InputText = <T extends FieldValues>({
             onBlur={field.onBlur}
             size={size || 'medium'}
             helperText={text ? text : ''}
+            onFocus={onFocus}
           />
           {error && <FormHelperText error>{error}</FormHelperText>}
         </FormControl>

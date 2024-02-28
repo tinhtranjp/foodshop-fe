@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {zodResolver} from '@hookform/resolvers/zod'
 import {Box, Button, TextField, Typography} from '@mui/material'
 import {Controller, useForm} from 'react-hook-form'
-import {any, z} from 'zod'
+import {z} from 'zod'
 import {InputText} from '~/components/InputFile/InputText'
 import {SelectInput} from '~/components/InputFile/SelectInput'
 import orderSchema from '~/utils/orderSchema'
@@ -18,10 +18,10 @@ import orderApi from '~/api/oderApi'
 import {addToResultOrder} from '../OrderSlice'
 import {useNavigate} from 'react-router-dom'
 import {removeAll} from '~/pages/Cart/CartSlice'
-type InputState = z.infer<typeof orderSchema>
 import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
 
+type InputState = z.infer<typeof orderSchema>
 interface cartItems {
   product_id: number | undefined
   total_money: number

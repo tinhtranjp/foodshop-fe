@@ -102,7 +102,7 @@ export default function OrderResult() {
                 textAlign='left'
                 fontWeight={600}
               >
-                メールアドレス{orderResult.email}
+                メールアドレス：{orderResult.email}
               </Typography>
               <Typography
                 py={1}

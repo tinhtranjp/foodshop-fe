@@ -183,3 +183,14 @@ li.thumb {
 .slick-next:before {
   color: #222 !important;
 }
+
+.adminLinkActive {
+  background-color: blue !important;
+  color: red !important;
+}
+
+.adminLinkPending {
+  background-color: blue !important;
+  color: white !important;
+
+}

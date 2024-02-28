@@ -1,64 +1,47 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import AddIcon from '@mui/icons-material/Add'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/DeleteOutlined'
 import SaveIcon from '@mui/icons-material/Save'
 import CancelIcon from '@mui/icons-material/Close'
+import {useParams} from 'react-router-dom'
 import {
   GridRowsProp,
   GridRowModesModel,
   GridRowModes,
   DataGrid,
   GridColDef,
-  GridToolbarContainer,
   GridActionsCellItem,
   GridEventListener,
   GridRowId,
   GridRowModel,
   GridRowEditStopReasons,
 } from '@mui/x-data-grid'
-import {randomId} from '@mui/x-data-grid-generator'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+import orderApi from '~/api/orderStoreAPI'
+import {useNavigate} from 'react-router-dom'
 
 const initialRows: GridRowsProp = []
 
-interface EditToolbarProps {
-  setRows: (newRows: (oldRows: GridRowsProp) => GridRowsProp) => void
-  setRowModesModel: (
-    newModel: (oldModel: GridRowModesModel) => GridRowModesModel,
-  ) => void
-}
-
-function EditToolbar(props: EditToolbarProps) {
-  const {setRows, setRowModesModel} = props
-
-  const handleClick = () => {
-    const id = randomId()
-    setRows((oldRows) => [
-      ...oldRows,
-      {id, name: '', price: null, quantity: 1, note: '', isNew: true},
-    ])
-    setRowModesModel((oldModel) => ({
-      ...oldModel,
-      [id]: {mode: GridRowModes.Edit, fieldToFocus: 'name'},
-    }))
-  }
-
-  return (
-    <GridToolbarContainer>
-      <Button color='primary' startIcon={<AddIcon />} onClick={handleClick}>
-        Add record
-      </Button>
-    </GridToolbarContainer>
-  )
-}
-
-export default function FullFeaturedCrudGrid() {
+export default function OrderStoreDetail() {
   const [rows, setRows] = useState(initialRows)
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({})
+  const [order, setOrder] = useState(null)
+  console.log(order)
 
-  console.log(rows)
+  let {orderId} = useParams()
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    orderApi
+      .get(orderId)
+      .then((response: any) => {
+        setOrder(response)
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error)
+      })
+  }, [])
 
   const handleRowEditStop: GridEventListener<'rowEditStop'> = (
     params,
@@ -104,43 +87,47 @@ export default function FullFeaturedCrudGrid() {
   }
 
   const columns: GridColDef[] = [
-    {field: 'name', headerName: 'Name', width: 180, editable: true},
+    {field: 'id', headerName: 'ID', width: 80, editable: false},
     {
-      field: 'price',
-      headerName: 'Price',
-      type: 'number',
+      field: 'orderDate',
+      headerName: 'Date',
+      type: 'string',
       width: 120,
       align: 'left',
       headerAlign: 'left',
-      editable: true,
-    },
-    {
-      field: 'quantity',
-      headerName: 'Quantity',
-      type: 'number',
-      width: 80,
       editable: true,
     },
     {
       field: 'note',
       headerName: 'Note',
-      width: 250,
-      editable: true,
       type: 'string',
+      width: 200,
+      editable: true,
     },
     {
-      field: 'total',
+      field: 'totalMoney',
       headerName: 'Total',
       width: 120,
       editable: false,
-      valueGetter: (params) => {
-        const price = params.row.price
-        const quantity = params.row.quantity
-        return price && quantity ? price * quantity : null
-      },
       type: 'number',
       align: 'left',
       headerAlign: 'left',
+    },
+    {
+      field: 'detail',
+      headerName: 'Detail',
+      width: 100,
+      renderCell: (params) => (
+        <Button
+          variant='contained'
+          color='secondary'
+          onClick={() => {
+            navigate(`/admin/order-store/view/${params.row.id}`)
+          }}
+        >
+          Detail
+        </Button>
+      ),
     },
     {
       field: 'actions',
@@ -193,8 +180,7 @@ export default function FullFeaturedCrudGrid() {
   return (
     <Box
       sx={{
-        height: 500,
-        width: '50%',
+        height: '80vh',
         mx: 'auto',
         '& .actions': {
           color: 'text.secondary',
@@ -212,9 +198,6 @@ export default function FullFeaturedCrudGrid() {
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        slots={{
-          toolbar: EditToolbar,
-        }}
         slotProps={{
           toolbar: {setRows, setRowModesModel},
         }}

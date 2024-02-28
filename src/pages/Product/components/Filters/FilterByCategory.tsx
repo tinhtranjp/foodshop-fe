@@ -1,14 +1,17 @@
-import { Box, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import {Box, Typography} from '@mui/material'
+import React, {useEffect, useState} from 'react'
 import categoryApi from '~/api/categoryApi'
-import { CategoryModel } from '~/model/CategoryModel'
+import {CategoryModel} from '~/model/CategoryModel'
+import queryString from 'query-string'
 
 interface FilterByCategoryProps {
   onChange: (newCategoryId: number, newCategoryName: string) => void
 }
 
-const FilterByCategory: React.FC<FilterByCategoryProps> = ({ onChange }) => {
+const FilterByCategory: React.FC<FilterByCategoryProps> = ({onChange}) => {
   const [categoryList, setCategoryList] = useState<CategoryModel[]>([])
+  const query = queryString.parse(window.location.search)
+  const categoryPath = query.category_name
 
   useEffect(() => {
     // eslint-disable-next-line no-extra-semi
@@ -31,12 +34,14 @@ const FilterByCategory: React.FC<FilterByCategoryProps> = ({ onChange }) => {
   return (
     <div>
       <Box>
-        <Typography sx={{ p: 3, pb: 2 }}>Danh Muc San Pham</Typography>
+        <Typography sx={{p: 3, pb: 2}}>Danh Muc San Pham</Typography>
         <ul className='list-none m-0 p-0 max-h-[400px] overflow-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200'>
           {categoryList &&
             categoryList.map((category) => (
               <li
-                className='py-2 hover:cursor-pointer item-hover hover:shadow-lg p-6 border-2 border-gray-300'
+                className={`${
+                  category.name === categoryPath ? 'text-[#2196F3]' : ''
+                } py-2 hover:cursor-pointer item-hover hover:shadow-lg p-6 border-2 border-gray-300`}
                 key={category.id}
                 onClick={() => handleCategoryClick(category)}
               >
