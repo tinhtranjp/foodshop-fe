@@ -64,7 +64,7 @@ export default function Product() {
     page: number,
   ) => {
     console.log(event)
-
+    window.scrollTo({top: 0})
     const filters = {
       ...queryParams,
       page: page,

@@ -28,6 +28,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider'
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
 import {DatePicker} from '@mui/x-date-pickers/DatePicker'
 import OrderStoreForm from './OrderStoreForm'
+import {Theme} from '@mui/material/styles'
 
 type InputState = z.infer<typeof orderDetail>
 
@@ -39,7 +40,7 @@ interface OrderDetails {
   note: string
 }
 
-const BootstrapDialog = styled(Dialog)(({theme}) => ({
+const BootstrapDialog = styled(Dialog)(({theme}: {theme: Theme}) => ({
   '& .MuiDialogContent-root': {
     padding: theme.spacing(2),
     width: '500px',
@@ -54,6 +55,18 @@ export const OrderStoreCreate = () => {
   const [detail, setDetail] = useState<OrderDetails | null>(null)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [value, setValue] = useState<Dayjs | null>(dayjs())
+  // const [gridHeight, setGridHeight] = useState(370)
+
+  // console.log(gridHeight)
+
+  // useEffect(() => {
+  //   const numRows = orderDetails.length
+
+  //   if (numRows < 5) {
+  //     setGridHeight(370)
+  //   }
+  // }, [orderDetails])
+
   const handleClickOpenDiaLog = () => {
     setOpenDialog(true)
   }
@@ -159,7 +172,7 @@ export const OrderStoreCreate = () => {
 
   const columns: GridColDef[] = [
     {field: 'id', headerName: 'ID', width: 70, type: 'number'},
-    {field: 'name', headerName: 'Name', width: 200, editable: true},
+    {field: 'name', headerName: 'Name', width: 100, editable: true},
     {
       field: 'price',
       headerName: 'Price',
@@ -181,7 +194,7 @@ export const OrderStoreCreate = () => {
     {
       field: 'note',
       headerName: 'Note',
-      width: 200,
+      width: 100,
       editable: true,
     },
     {

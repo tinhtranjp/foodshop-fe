@@ -8,7 +8,9 @@ import PersonIcon from '@mui/icons-material/Person'
 import {NavLink, Outlet} from 'react-router-dom'
 import CreditCardIcon from '@mui/icons-material/CreditCard'
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag'
-const Item = styled(Paper)(({theme}) => ({
+import {Theme} from '@mui/material/styles'
+import MocAvatar from '~/assets/img/moc.jpg'
+const Item = styled(Paper)(({theme}: {theme: Theme}) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -36,7 +38,11 @@ export const Admin = () => {
                     textDecoration: 'none',
                   })}
                 >
-                  MOC
+                  <img
+                    src={MocAvatar}
+                    alt='moc'
+                    style={{width: '80px', height: '80px'}}
+                  />
                 </NavLink>
               </Typography>
               <Box
@@ -45,7 +51,7 @@ export const Admin = () => {
                   listStyle: 'none',
                   p: '0',
                   textAlign: 'left',
-                  px: 5,
+                  px: 2,
                 }}
               >
                 <NavLink

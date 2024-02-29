@@ -31,6 +31,8 @@ export default function OrderStoreView() {
     orderApi
       .getAll()
       .then((response) => {
+        console.log('hehehe', response)
+
         setRows(response)
       })
       .catch((error) => {
@@ -98,6 +100,18 @@ export default function OrderStoreView() {
       type: 'string',
       width: 200,
       editable: true,
+    },
+    {
+      field: 'record',
+      headerName: 'Record',
+      type: 'number',
+      align: 'left',
+      headerAlign: 'left',
+      width: 200,
+      valueGetter: (params) => {
+        const orderDetailsLength = params.row.orderDetails1.length
+        return orderDetailsLength
+      },
     },
     {
       field: 'totalMoney',

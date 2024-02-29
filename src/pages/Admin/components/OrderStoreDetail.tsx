@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/DeleteOutlined'
 import SaveIcon from '@mui/icons-material/Save'
 import CancelIcon from '@mui/icons-material/Close'
-import {useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import {
   GridRowsProp,
   GridRowModesModel,
@@ -16,27 +16,28 @@ import {
   GridRowId,
   GridRowModel,
   GridRowEditStopReasons,
+  GridValueGetterParams,
 } from '@mui/x-data-grid'
 import {useEffect, useState} from 'react'
 import orderApi from '~/api/orderStoreAPI'
-import {useNavigate} from 'react-router-dom'
+import {Button, Typography} from '@mui/material'
 
 const initialRows: GridRowsProp = []
 
 export default function OrderStoreDetail() {
   const [rows, setRows] = useState(initialRows)
   const [rowModesModel, setRowModesModel] = useState<GridRowModesModel>({})
-  const [order, setOrder] = useState(null)
-  console.log(order)
+  console.log(rows)
 
+  // eslint-disable-next-line prefer-const
   let {orderId} = useParams()
-
   const navigate = useNavigate()
   useEffect(() => {
     orderApi
       .get(orderId)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .then((response: any) => {
-        setOrder(response)
+        setRows(response.orderDetails1)
       })
       .catch((error) => {
         console.error('Error fetching data:', error)
@@ -89,13 +90,31 @@ export default function OrderStoreDetail() {
   const columns: GridColDef[] = [
     {field: 'id', headerName: 'ID', width: 80, editable: false},
     {
-      field: 'orderDate',
-      headerName: 'Date',
+      field: 'name',
+      headerName: 'Name',
       type: 'string',
       width: 120,
       align: 'left',
       headerAlign: 'left',
       editable: true,
+    },
+    {
+      field: 'price',
+      headerName: 'Price',
+      width: 120,
+      editable: true,
+      type: 'number',
+      align: 'left',
+      headerAlign: 'left',
+    },
+    {
+      field: 'quantity',
+      headerName: 'Quantity',
+      width: 120,
+      editable: true,
+      type: 'number',
+      align: 'left',
+      headerAlign: 'left',
     },
     {
       field: 'note',
@@ -105,29 +124,16 @@ export default function OrderStoreDetail() {
       editable: true,
     },
     {
-      field: 'totalMoney',
+      field: 'total',
       headerName: 'Total',
-      width: 120,
-      editable: false,
+      width: 130,
+
+      valueGetter: (params: GridValueGetterParams) => {
+        const price = Number(params.row.price)
+        const quantity = Number(params.row.quantity)
+        return price * quantity
+      },
       type: 'number',
-      align: 'left',
-      headerAlign: 'left',
-    },
-    {
-      field: 'detail',
-      headerName: 'Detail',
-      width: 100,
-      renderCell: (params) => (
-        <Button
-          variant='contained'
-          color='secondary'
-          onClick={() => {
-            navigate(`/admin/order-store/view/${params.row.id}`)
-          }}
-        >
-          Detail
-        </Button>
-      ),
     },
     {
       field: 'actions',
@@ -180,7 +186,7 @@ export default function OrderStoreDetail() {
   return (
     <Box
       sx={{
-        height: '80vh',
+        height: '60vh',
         mx: 'auto',
         '& .actions': {
           color: 'text.secondary',
@@ -190,6 +196,16 @@ export default function OrderStoreDetail() {
         },
       }}
     >
+      <Box sx={{display: 'flex', justifyContent: 'end', mb: 5}}>
+        <Button
+          variant='contained'
+          startIcon={<ArrowBackIcon />}
+          color='secondary'
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </Button>
+      </Box>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -202,6 +218,18 @@ export default function OrderStoreDetail() {
           toolbar: {setRows, setRowModesModel},
         }}
       />
+      <Typography fontWeight={600} textAlign='right' py={2}>
+        Tổng tiền :{' '}
+        {rows
+          .reduce((total, item) => {
+            const price = parseFloat(item.price)
+            const quantity = parseFloat(item.quantity)
+            const subtotal = price * quantity
+            return total + subtotal
+          }, 0)
+          .toLocaleString()}
+        円
+      </Typography>
     </Box>
   )
 }

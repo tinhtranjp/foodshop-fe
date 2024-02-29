@@ -59,6 +59,7 @@ export default function OrderStoreForm({
       return total + subtotal
     }, 0)
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const newDetails = orderDetails.map(({id, ...rest}) => rest)
 
     const newData = {

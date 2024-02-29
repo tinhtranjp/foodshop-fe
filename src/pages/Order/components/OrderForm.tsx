@@ -110,7 +110,7 @@ export const OrderForm = () => {
           handleCloseBackDrop()
           console.error('Error:', error)
         })
-    }, 1000)
+    }, 500)
   }
 
   return (
